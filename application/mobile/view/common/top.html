@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="keywords" content="{if isset($keywords)}{$keywords}{/if}">
+<meta name="description" content="{if isset($description)}{$description}{/if}">
+<link type="text/css" rel="stylesheet" href="__INDEX__/css/index.css">
+<link type="text/css" rel="stylesheet" href="__INDEX__/css/slide.css">
+<script src="__INDEX__/js/jquery.min.js"></script>
+<script src="__INDEX__/js/TouchSlide.1.1.js"></script>
+<link type="text/css" rel="stylesheet" href="__INDEX__/css/yd.css">
+<script src="__INDEX__/js/daohang.js" type="text/javascript"></script>
+<link rel="stylesheet" href="__INDEX__/css/daohang.css">
+<link rel="stylesheet" href="__INDEX__/css/style.css">
+<link href="__INDEX__/css/fenlei.css" rel="stylesheet" type="text/css" />
+<title>{if isset($title)}{$title}{/if}</title>
+
+</head>
+<body>
+	<div class="top" id="#top">
+		<div class="Menu-icon fl">
+			<a href="#" class="nav__trigger">
+				<span class="nav__icon"></span>
+			</a>
+			<nav class="nav">
+				<ul class="nav__list">
+					<li>
+						<h2>
+							<a href="/mobile/news/index">文旅资讯</a>
+						</h2>
+						<h3>
+							<!-- {foreach $new_cate as $new_cate} -->
+							<a href="/mobile/news/index.html?type={$new_cate.id}" title="{$new_cate.name}">{$new_cate.name}</a>
+							<!-- {/foreach} -->
+						</h3>
+					</li>
+					<li>
+						<h2>
+							<a href="/mobile/dakashuo/index.html">大咖说</a>
+						</h2>
+						<h3>
+							<!-- {foreach $dakashuo_cate as $dakashuo_cate} -->
+							<a href="/mobile/dakashuo/index.html?cate_id={$dakashuo_cate.id}" title="{$dakashuo_cate.name}">{$dakashuo_cate.name}</a>
+							<!-- {/foreach} -->
+						</h3>
+					</li>
+					<li>
+						<h2>
+							<a href="/mobile/activity/index.html" title="">文旅活动</a>
+						</h2>
+						<h3>
+							<!-- {foreach $activity_cate as $activity_cate} -->
+							<a href="/mobile/activity/index.html?cate_id={$activity_cate.id}" title="{$activity_cate.name}">{$activity_cate.name}</a>
+							<!-- {/foreach} -->
+						</h3>
+					</li>
+					<li>
+						<h2>
+							<a href="/mobile/meeting/index.html" title="">文旅峰会</a>
+						</h2>
+						<h3></h3>
+					</li>
+					<li>
+						<h2>
+							<a href="/mobile/investment/index.html" title="">融资/转让</a>
+						</h2>
+						<h3>
+							<!-- {foreach $investment_cate as $investment_cate} -->
+							<a href="/mobile/investment/index.html?cate_id={$investment_cate.id}" title="{$investment_cate.name}">{$investment_cate.name}</a>
+							<!-- {/foreach} -->
+						</h3>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="logo">
+			<img src="__IMAGE__/mobile/logo.png" />
+		</div>
+		<div class="search-input">
+			<form action="/mobile/search/index" id="search_form">
+				<input name="kws" placeholder="请输入业态分类.." value=''>
+			</form>
+		</div>
+		<div class="search-icon">
+			<img src="__IMAGE__/mobile/top_search.png" />
+		</div>
+	</div>
+	<!--top end-->

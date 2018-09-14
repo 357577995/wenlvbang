@@ -1,0 +1,70 @@
+{include file="common/top"}
+<!--center-->
+<div class="main_c">
+	<div class="main" id="content">
+		<!-- 内容部分 -->
+		<div class="pro_list bkj">
+			<ul class="result_list">
+				<!-- {foreach $project as $project} -->
+				<li>
+					<div class="pro_pic">
+						<a href="/index/project/info.html?id={$project.id}" title="">
+							<img src="__IMAGE__/index/bangkongjian1.png" alt="">
+						</a>
+					</div>
+					<div class="pro_c">
+						<a href="/index/project/info.html?id={$project.id}" title="">
+							<h2 style="width:367px;">{$project.title|mb_substr=0,20,"utf-8"}</h2>
+						</a>
+						<div>{$project.fu_title}</div>
+					</div>
+					<div class="pro_ico">
+						<span>{$project.name}</span>
+						<span>
+							<img src="__IMAGE__/index/ico_3.png" alt=" ">
+							{$project.name}
+						</span>
+						<span>{$project['time']|date="Y-m-d",###}</span>
+					</div>
+				</li>
+				<!-- {/foreach} -->
+			</ul>
+			<div class="c"></div>
+			<div class="paging" data-limit="{$limit}">
+				<input type="hidden" value="{$cate_id}" id='cate_id' />
+				<a class="next" href="javascript:void(0);">查看更多</a>
+			</div>
+		</div>
+		<!-- 内容部分 end-->
+	</div>
+</div>
+<!--center end-->
+<script type="text/javascript">
+	$(".paging").click(function() {
+
+		var limit = $(this).data('limit');
+		var cate_id = $("#cate_id").val();
+
+		$(this).data('limit', limit + 1);
+		$.ajax({
+			type: 'GET',
+			url: '/index/project/more',
+			data: {
+				limit: limit,
+				cate_id: cate_id
+			},
+			success: function(result) {
+				if (result.code == 1) {
+					$(".result_list").append(result.data);
+				} else {
+					$(".paging").hide();
+				}
+			},
+			dataType: 'json'
+		});
+	})
+</script>
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

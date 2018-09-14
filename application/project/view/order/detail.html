@@ -1,0 +1,89 @@
+﻿{extend name="base" /}
+{block name="title"}订单详情{/block}
+{block name="body"}
+<link rel="stylesheet" href="__ADMIN__/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" charset="utf-8" src="__UEDITOR__/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__UEDITOR__/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__UEDITOR__/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="__INDEX__/introduction/jquery.min.js"></script>
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 方案订单 <span class="c-gray en">&gt;</span> 订单详情 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<div>
+			<div class="pd-20">
+				<div class="mt-20">
+					<table class="table table-border table-bordered table-bg table-hover table-sort">
+						<thead>
+							<tr class="text-c">
+								<th width="120">订单编号</th>
+								<th>项目标题</th>
+								<th>项目简述</th>
+								
+							</tr>
+						</thead>
+							<tr class="text-c va-m">
+								<td>{$order.order_sn}</td>
+								<td>{$order.title}</td>
+								<td>{$order.resume}</td>
+								
+							</tr>
+						<thead>
+							<tr class="text-c">
+								<th width="120">添加时间</th>
+								<th width="120">平台操作时间</th>
+								<th width="60">状态</th>
+								
+							</tr>
+						</thead>
+							<tr class="text-c va-m">
+								<td>{$order.addtime}</td>
+								<td>{$order.dotime}</td>
+								<td>
+									{if condition="$order.status eq 1"}
+										<span style="color:red">未查看</span>
+									{elseif condition="$order.status eq 2" /}
+										<span style="color:green">已查看</span>
+									{/if}
+								</td>
+								
+							</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		{foreach $order_detail as $k=>$detail}
+		<article class="cl pd-20">
+			<div style="font-size:30px;text-align:center;">方案{$k+1}</div>
+			<div class="page-container">
+			<table class="table table-border table-bordered table-bg table-hover table-sort" style="width:80%;margin:0px auto;">
+				<tr class="text-c va-m">
+					<td>方案名称：{$detail.plan.name}</td>
+					<td>类别：{$detail.plan.cate1}&nbsp;>&nbsp;{$detail.plan.cate2}</td>
+				</tr>
+				<tr class="text-c va-m">
+					<td>参数：
+						{foreach $detail.plan.param as $param}
+							{$param.name}：{$param.value}&nbsp;&nbsp;&nbsp;
+						{/foreach}
+					</td>
+					<td>图片：<img src="__IMAGE__{$detail.plan.image}" alt="" width="300"></td>
+				</tr>
+				<tr class="text-c va-m">
+					<td colspan="2">
+						<script id="editor{$k}" name="content" type="text/plain" style="width:1000px;height:500px;">{$detail.plan.content}</script>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</article>
+	{/foreach}
+	<input type="hidden" name="num" id="num" value="{$num}">
+	</div>
+</section>
+<script type="text/javascript">
+	var num = $('#num').val();
+	for( var i = 0; i <num.length; i++){
+		var ue = UE.getEditor('editor'+num[i]);   
+	}  
+</script>
+{/block}

@@ -1,0 +1,61 @@
+{extend name="base" /}
+{block name="title"}添加业态参数{/block}
+{block name="body"}
+<link href="__ADMIN__/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+<section class="Hui-article-box">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+		<span class="c-gray en">&gt;</span>
+		业态参数管理
+		<span class="c-gray en">&gt;</span>
+		添加业态参数 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
+<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="page-container">
+			<form action="/admin/cate/param_insert" method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>参数名：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" value="" id="name" name="name">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>参数值的类型：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<select class="input-text" id="type" name="type">
+							<option value="">--请选择--</option>
+							<option value="2">数字类型</option>
+							<option value="1">汉字类型</option>
+						</select>
+					</div>
+				</div>
+				
+				<input type="hidden" name="cate_id" value="{$cate_id}">
+				<div class="row cl" style="margin-top:100px;">
+					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+						<button id="submits" class="btn btn-primary radius" onclick="return yanzheng()" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		</article>
+	</div>
+</section>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__ADMIN__/lib/webuploader/0.1.5/webuploader.min.js"></script> 
+<script type="text/javascript">
+
+    //提交表单的事件监听  
+    function yanzheng(){
+    	var name = $('#name').val();
+    	if(name==''){
+    		alert('参数名称不能为空');
+    		return false;
+    	}
+    	var type = $('#type').val();
+    	if(type==''){
+    		alert('参数值的类型不能为空');
+    		return false;
+    	}
+    }
+</script>
+{/block}

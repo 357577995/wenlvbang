@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<meta http-equiv="Pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache"> 
+<meta http-equiv="Expires" content="0"> 
+<title>找回密码</title>
+<link rel="icon" href="__IMAGE__{$config.icon}" type="image/x-icon" />
+<link href="__ADMIN__/static/login.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="login_box">
+      <div class="login_l_img"><img src="__IMAGE__/service/login-img.png" /></div>
+      <div class="login">
+          <div class="login_logo"><a href="javascript:void(0)"><img src="__IMAGE__/service/login_logo.png" /></a></div>
+          <div class="login_name"><p>邮箱找回密码</p></div>
+          <input id="email" name="email" type="text"  value="请输入注册时所填邮箱" onfocus="this.value=''" onblur="if(this.value==''){this.value='请输入注册时所填邮箱'}">
+          <span id="chkmsg" style="color:red"></span>
+          <input id="sub_btn" value="找回密码" style="width:100%;" type="submit">
+          <a href="/project/login/login" class="btn btn-default radius size-L" style="float:right">点我去登录</a>
+          
+          
+      </div>
+      <div class="copyright">文旅帮 版权所有©2016-2018</div>
+</div>
+</body>
+<script type="text/javascript" src="__ADMIN__/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#sub_btn").click(function() {
+            var email = $("#email").val();
+            var preg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/; //匹配Email
+            if(email == '' || !preg.test(email)) {
+                $("#chkmsg").html("请填写正确的邮箱格式！");
+            }else {
+                //判断输入的邮箱是否存在
+                $.post("/project/login/isemail", {email: email}, function(msg) {
+                    if(msg == 1){
+                        $("#sub_btn").attr("disabled", "disabled").val('提交中..').css("cursor", "default");
+                        //跳转
+                        window.location.href="/project/login/sendmail?email="+email; 
+                    }else if(msg == 2){
+                        $("#chkmsg").html("该邮箱尚未注册！");
+                        $("#sub_btn").removeAttr("disabled").val('提 交').css("cursor", "pointer");
+                    }
+                });
+            }
+        });
+    })
+</script>
+</html>

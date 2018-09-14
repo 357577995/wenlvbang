@@ -1,0 +1,99 @@
+﻿{extend name="base" /}
+{block name="title"}实战营信息列表{/block}
+{block name="body"}
+<link rel="stylesheet" href="__ADMIN__/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 实战营 <span class="c-gray en">&gt;</span> {if condition="$type eq 1"}大咖解读{elseif condition="$type eq 2" /}走进企业{elseif condition="$type eq 3" /}文旅研究{elseif condition="$type eq 4" /}文旅活动{elseif condition="$type eq 5" /}文旅峰会{/if} <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<div>
+			<div class="pd-20">
+				<div class="mt-20">
+					<form action="/admin/message/index" method="get" accept-charset="utf-8">
+						<div class="text-c"> 
+							<input type="text" class="input-text" style="width:250px" placeholder="标题" name="title" value="{if isset($_GET['title'])}{$_GET['title']}{/if}">
+							{in name="type" value="1,4"}
+							<span class="select-box inline">
+								<select class="select"  name="cate_id">
+									<option value="">--类别--</option>
+									{foreach $catelist as $cate}
+									<option value="{$cate.id}" {if isset($_GET['cate_id'])}{if condition="$_GET['cate_id'] eq $cate.id"}selected{/if}{/if} >{$cate.name}</option>
+									{/foreach}
+								</select>
+							</span>
+							{/in}
+							发布时间：
+							<input type="text" onfocus="WdatePicker()" id="logmin" class="input-text Wdate" name="time1" style="width:120px;" value="{if isset($time1)}{:date('Y-m-d H:i:s',$time1)}{/if}">
+							-
+							<input type="text" onfocus="WdatePicker()" id="logmax" class="input-text Wdate" name="time2" style="width:120px;" value="{if isset($time2)}{:date('Y-m-d H:i:s',$time2)}{/if}">
+							<input type="hidden" name="type" value="{$type}">
+							<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+						</div>
+					</form>
+					<div class="cl pd-5 bg-1 bk-gray mt-20">
+						<a href="/admin/message/add?type={$type}" class="btn btn-danger radius">添加{if condition="$type eq 1"}大咖解读{elseif condition="$type eq 2" /}走进企业{elseif condition="$type eq 3" /}文旅研究{elseif condition="$type eq 4" /}文旅活动{elseif condition="$type eq 5" /}文旅峰会{/if}</a>
+						{in name="type" value="1,4"}
+						<a href="/admin/message/cate?type={$type}" class="btn btn-success radius">查看{if condition="$type eq 1"}大咖解读{elseif condition="$type eq 2" /}走进企业{elseif condition="$type eq 3" /}文旅研究{elseif condition="$type eq 4" /}文旅活动{elseif condition="$type eq 5" /}文旅峰会{/if}分类</a>
+						{/in}
+						<span class="r">共有数据：<strong>{$total}</strong> 条</span>
+					</div><br/>
+					<table class="table table-border table-bordered table-bg table-hover table-sort">
+						<thead>
+							<tr class="text-c">
+								<th width="40">ID</th>
+								<th width="120">标题</th>
+								{in name="type" value="1,4"}
+								<th width="120">类别</th>
+								{/in}
+								<th width="120">图片</th>
+								<th width="120">发布时间</th>
+								{if condition="$type eq 4"}
+								<th width="120">报名表单</th>
+								{/if}
+								<th width="230">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						{foreach $message as $vo}
+							<tr class="text-c va-m">
+								<td>{$vo.id}</td>
+								<td>{$vo.title}</td>
+								{in name="type" value="1,4"}
+								<td>{$vo.cate}</td>
+								{/in}
+								<td><img src="__IMAGE__{$vo.image}" alt="" width="100"></td>
+								<td>{$vo.time}</td>
+								{if condition="$type eq 4"}
+								<td class="td-manage">
+									<a href="/admin/message/form?id={$vo.id}" class="btn btn-danger radius">修改报名表单</a><br/><br/>
+									{if condition="$vo.form_show eq 1"}
+									<a href="/admin/message/show?type={$type}&id={$vo.id}" class="btn btn-success radius">前台显示</a>
+									{elseif condition="$vo.form_show eq 0"/}
+									<a href="/admin/message/noshow?type={$type}&id={$vo.id}" class="btn btn-primary radius">前台不显示</a>
+									{/if}
+								</td>
+								{/if}
+								<td class="td-manage">
+									{if condition="$type eq 4"}
+										<a href="/index/index/activity?id={$vo.id}" target="_blank" class="btn btn-danger radius">页面展示</a>
+										<a style="text-decoration:none" class="btn btn-success radius" href="/admin/message/form_user?id={$vo.id}" >报名会员</a><br/><br/>
+									{/if}
+									<a style="text-decoration:none"  class="btn btn-success radius" href="/admin/message/edit?type={$type}&id={$vo.id}" >编辑</a>
+									<a style="text-decoration:none" class="btn btn-primary radius" href="/admin/message/del?type={$type}&id={$vo.id}" onclick="javascript:return confirm('确认删除吗？')" >删除</a>
+								</td>
+							</tr>
+						{/foreach}
+						</tbody>
+					</table>
+				</div>
+				<div class="fenye">{$page}</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__ADMIN__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+{/block}

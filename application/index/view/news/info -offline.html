@@ -1,0 +1,73 @@
+{include file="common/top"}
+<!-- 头部 end -->
+
+<!--center-->
+<div class="main_c">
+	<div class="main" id="content">
+
+		<!-- 内容部分 -->
+		<div class="sp_content" id="contentLeft">
+			<div class="content cpage">
+				<div class="c_crumb">
+					<a href="">首页</a>
+					&gt;
+					<a href="">文旅资讯</a>
+					&gt;
+					<a href="">{$cate_info.name}</a>
+				</div>
+				<h1 class="c_tit">{$news.title}</h1>
+				<div class="c_data">资讯分类：{$cate_info.name} &nbsp;&nbsp;&nbsp;&nbsp; 本站编辑：{$news['author']}&nbsp;&nbsp;&nbsp;&nbsp; 发布时间：{$news['time']|date="Y-m-d",###} </div>
+				 
+				{if $user_id}
+				<div class="c_txt">{$news.content}</div>
+				{else}
+				<div class="c_txt">{$news.offline_content}</div>
+				<a href="/index/login/index">查看更多</a>
+				{/if}
+				<div>
+					{if $tab} {foreach $tab as $tab}
+					<span>{$tab.name}</span>
+					{/foreach} {/if}
+					<br />
+					<br />
+
+				</div>
+				<div>
+					<!-- {if $last} -->
+					上一篇：
+					<a href="/index/news/info.html?id={$last.id}">{$last.title}</a>
+					<!-- {/if} -->
+					<!-- {if $next} -->
+					下一篇：
+					<a href="/index/news/info.html?id={$next.id}">{$next.title}</a>
+					<!-- {/if} -->
+					<br />
+					<br />
+
+				</div>
+				{if $recomme}
+				<div>
+					相关推荐：
+					<br />
+					根据添加文章是添加的标签来匹配相关推荐3个，如此文章的标签有“小程序”，则相关推荐的文章标签肯定也有“小程序“ {foreach $recomm as $recomm}
+					<a href="/index/news/info.html?id={$recomm.id}">{$recomm.title}</a>
+					<br />
+					{/foreach}
+
+				</div>
+				{/if}
+			</div>
+		</div>
+		<!-- 内容部分 end-->
+
+		<!-- 右侧部分 -->
+		{include file="common/right"}
+		<!-- 右侧部分 end-->
+	</div>
+</div>
+<!--center end-->
+
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

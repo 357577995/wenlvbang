@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>注册</title>
+<link rel="stylesheet" type="text/css" href="__INDEX__/skin/child_cart.css">
+<link rel="stylesheet" type="text/css" href="__INDEX__/skin/child_atm.css">
+<link rel="stylesheet" type="text/css" href="__INDEX__/skin/master.css">
+<link rel="stylesheet" type="text/css" href="__INDEX__/skin/inside.css">
+<script type="text/javascript" src="__INDEX__/skin/jquery.js"></script>
+<script type="text/javascript" src="__INDEX__/skin/banner.js"></script>
+<script type="text/javascript" src="__INDEX__/skin/child_atm.js"></script>
+<script type="text/javascript" src="__INDEX__/skin/jQselect.js"></script>
+<script type="text/javascript" src="__INDEX__/skin/lihe.js"></script>
+<!--[if IE 6]>
+<script type="text/javascript" src="js/png.js"></script>
+<script>DD_belatedPNG.fix('div,img,span,li,a,a:hover,dd,p,input,select')</script>
+<![endif]-->
+</head>
+
+<body class="zcbg">
+	<!-- 头部 -->
+	<div class="header">
+		<!-- logo -->
+		<div class="h_mid_c">
+			<div class="h_mid">
+				<div class="logo">
+					<a href="" class="fl">
+						<img src="__IMAGE__/index/logo.png">
+					</a>
+					<small class="fl">文旅IP业态集成平台</small>
+				</div>
+				<div class="zhanghao">
+					<a href="/project/login/index.html">
+						 
+						<span>项目方登录</span>
+					</a><a href="/service/login/index.html">
+						 
+						<span>服务方登录</span>
+					</a>
+				</div>
+			</div>
+			<div class="c"></div>
+		</div>
+		<!-- logo end-->
+	</div>
+	<!-- 头部 end -->
+
+	<!--center-->
+	<div class="main_c">
+		<div class="main">
+			<div class="zc_box">
+				<div class="title">
+					<h1 class="sel" id="fws">服务商注册</h1>
+					<h1 id="xmf">项目方注册</h1>
+				</div>
+				<form action="__INDEX__/register/register" method="post">
+					<ul class="fwsul">
+						<li>
+							<span>手机号</span>
+							<input type="text" id='mobile' name="mobile" placeholder="请输入手机号">
+						</li>
+						<li>
+							<span>设置密码</span>
+							<input type="text" name="password" placeholder="请输入密码">
+						</li>
+						<li>
+							<span>确认密码</span>
+							<input type="text" name="repassword" placeholder="请再次输入密码">
+						</li>
+						 	<li>
+							<span>验证码</span><input type="text" name="code" id="code" placeholder="验证码"  style="width:150px;"/><img id="verify_img" src="{:captcha_src()}" alt="验证码" onClick="refreshVerify()" style=" width:150px; height:40px; float:left">
+						</li>  
+ 
+
+						<li>
+							<span>短信验证码</span>
+							<input type="text" name="sms_code" placeholder="请输入手机短信验证码" maxlength="6" style="width:150px;">
+							<input id="zphone" type="button" value=" 获取手机验证码 "   onClick="get_mobile_code()" style="width:150px;">
+						</li>
+						
+						<li><input id="register_type" type="hidden" name='type' value=2>
+							<input type="submit" class="sub" value="立即注册">
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		/*注册选择*/
+		$('#fws').mouseover(function() {
+			$("#fws").addClass("sel");
+			$("#xmf").removeClass("sel");
+			$("#register_type").val(2);
+		});
+		$('#xmf').mouseover(function() {
+			$("#xmf").addClass("sel");
+			$("#fws").removeClass("sel");
+			$("#register_type").val(1);
+		});
+		function refreshVerify() {
+			var ts = Date.parse(new Date()) / 1000;
+			var img = document.getElementById('verify_img');
+			img.src = "/captcha?id=" + ts;
+		}
+	</script>
+
+	<script type="text/javascript">
+		function get_mobile_code() {
+		 	var mobile = $('#mobile').val();
+			var code = $("#code").val()
+			if (isNaN(mobile)) {
+				alert('请输入正确的电话号码！');
+				form.mobile.focus();
+				return false;
+			}
+			var reg = /^1[34578][0-9]{9}$/;
+			if (!reg.test(mobile)) {
+				alert('请输入正确的电话号码！');
+				form.mobile.focus();
+				return false;
+			} 
+			$.post('/index/register/sendsms', {
+				mobile: jQuery.trim(mobile),
+				send_code: code
+			}, function(msg) {
+				alert(jQuery.trim(unescape(msg)));
+				if (msg == '提交成功') {
+					RemainTime();
+				} else {
+					location.reload();
+				}
+			});
+		};
+		var iTime = 59;
+		var Account;
+		function RemainTime() {
+			document.getElementById('zphone').disabled = true;
+			var iSecond, sSecond = "", sTime = "";
+			if (iTime >= 0) {
+				iSecond = parseInt(iTime % 60);
+				iMinute = parseInt(iTime / 60)
+				if (iSecond >= 0) {
+					if (iMinute > 0) {
+						sSecond = iMinute + "分" + iSecond + "秒";
+					} else {
+						sSecond = iSecond + "秒";
+					}
+				}
+				sTime = sSecond;
+				if (iTime == 0) {
+					clearTimeout(Account);
+					sTime = '获取手机验证码';
+					iTime = 59;
+					document.getElementById('zphone').disabled = false;
+				} else {
+					Account = setTimeout("RemainTime()", 1000);
+					iTime = iTime - 1;
+				}
+			} else {
+				sTime = '没有倒计时';
+			}
+			document.getElementById('zphone').value = sTime;
+		}
+	</script>
+	<!--center end-->
+
+	<!-- footer -->
+	<div class="footclear"></div>
+	<div class="foot_end lg">©COPYRIGHT 2012 北京文旅帮科技发展有限公司 版权所有京ICP备15047706号-2</div>
+</body>
+</html>

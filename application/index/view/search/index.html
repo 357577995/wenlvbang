@@ -1,0 +1,100 @@
+{include file="common/top"}
+<!--业态-->
+<div class="index_pro ytss">
+	<div class="clear"></div>
+	<p class="proname">
+		<span>搜索结果</span>
+	</p>
+	<div class="clear"></div>
+	<div class="fenlei">
+		<a href="">业态分类：</a>
+		<!-- {foreach $f_cate as $f_cate} -->
+		<a href="{$f_cate.url}" {if $f_cate.selected}class="sel"{/if}>{$f_cate.name}</a>
+		<!-- {/foreach} -->
+	</div>
+	<div class="fenlei flz">
+		<a href="">子分类：</a>
+		<!-- {foreach $s_cate as $s_cate} -->
+		<a href="{$s_cate.url}" {if $s_cate.selected}class="sel"{/if}>{$s_cate.name}</a>
+		<!-- {/foreach} -->
+	</div>
+	<div class="pro_list">
+		<ul class="newslist">
+			<!-- {foreach $plan as $plan} -->
+			<li>
+				<div class="pro_pic">
+					<a href="" title="">
+						<img src="__IMAGE__/{$plan.image}" alt="">
+					</a>
+				</div>
+				<div class="pro_c">
+					<a href="" title="">
+						<h2>{$plan.name}</h2>
+					</a>
+					<div>{$plan.content}</div>
+				</div>
+				<div class="pro_ico">
+					<span>
+						<img src="__IMAGE__/index/ico_1.png" alt="收藏">
+						收藏
+					</span>
+
+					<span>
+						<a href="/index/cart/add?plan_id={$plan.id}">
+							<img src="__IMAGE__/index/ico_2.png" alt="加入购物车">
+						</a>
+					</span>
+
+				</div>
+			</li>
+			<!-- {/foreach} -->
+		</ul>
+		<div class="paging" data-limit="{$limit}">
+			<input type="hidden" value="{$kws}" id='kws' />
+			<input type="hidden" value="{$f_id}" id='f_id' />
+			<input type="hidden" value="{$s_id}" id='s_id' />
+
+			<a class="next" href="javascript:void(0);">查看更多</a>
+		</div>
+		<div class="c">
+			<br>
+			<br>
+			<br>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(".paging").click(function() {
+
+		var limit = $(this).data('limit');
+		var kws = $("#kws").val();
+		var s_id = $("#s_id").val();
+		var f_id = $("#f_id").val();
+		$(this).data('limit', limit + 16);
+		$.ajax({
+			type: 'GET',
+			url: '/index/search/more',
+			data: {
+				limit: limit,
+				kws: kws,
+				s_id: s_id,
+				f_id: f_id
+			},
+			success: function(result) {
+				if (result.code == 1) {
+					$(".newslist").append(result.data);
+				} else {
+					$(".paging").hide();
+				}
+			},
+			dataType: 'json'
+		});
+	})
+</script>
+<div class="clear"></div>
+<!--业态end-->
+
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

@@ -1,0 +1,124 @@
+
+<div class="sp_right" id="contentRight">
+
+	<div class="sub_common">
+		<div class="sub_common_title">
+			<h2>专家入驻申请</h2>
+
+		</div>
+		<div class="sub_youhui_content ilist2" align="center">
+			<form action="/index/expert/insert" method="post" onsubmit="return check(this)" class="zjsqrz">
+				<div>
+					<span>专家姓名</span>
+					<input type="text" name="name">
+				</div>
+				<div>
+					<span>专家电话</span>
+					<input type="text" name="mobile">
+				</div>
+				<div>
+					<span>擅长领域</span>
+					<input type="text" name="place">
+				</div>
+				<div>
+					<span>个人简介</span>
+					<textarea name="content" cols="" rows="" style="width: 160px; border-bottom: #CC9900 1px solid; height: 60px; background-color: #f8f8f8"></textarea>
+					<br />
+					<input name="" type="submit" value="立即申请" style="width: 80px; height: 28px; background-color: #f7921e; color: #FFFFFF;" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="sub_common">
+		<div class="sub_common_title">
+			<h2>游学营</h2>
+			<a href="/index/activity/index.html" title="更多">更多</a>
+		</div>
+		<div class="sub_youhui_content ilist2">
+			<ul>
+				<!-- {foreach $activity as $activity } -->
+				<li>
+					<div>
+						<span>15</span>
+						<br>
+						<span>07月</span>
+					</div>
+					<a href="/index/activity/info.html?id={$activity.id}" title="">
+						<h2>{$activity.title}</h2>
+						<!-- <span>姚明</span> -->
+					</a>
+				</li>
+				<!-- {/foreach} -->
+
+			</ul>
+		</div>
+	</div>
+	<div class="sub_common">
+		<div class="sub_common_title">
+			<h2>大咖驾到</h2>
+			<a href="/index/dakashuo/index.html" title="更多">更多</a>
+		</div>
+		<div class="sub_youhui_content itao">
+			<ul>
+				<li>
+					<a href="/index/dakashuo/info.html?id={$dakazhuanfang.id}" title="">
+						<img src="__IMAGE__/{$dakazhuanfang.image}" />
+						<span>大咖专访</span>
+						<h2>{$dakazhuanfang.title}</h2>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="sub_youhui_content ilist">
+			<ul>
+				<!-- {foreach $daka_arcitle as $daka_arcitle} -->
+				<li>
+					<a href="/index/dakashuo/info.html?id={$daka_arcitle.id}" title="">
+						<span>订阅</span>
+						<h2>{$daka_arcitle.title}</h2>
+					</a>
+				</li>
+				<!-- {/foreach} -->
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//form提交前，验证
+	function check(form) {
+		if (form.name.value == '') {
+			alert('专家名称不能为空！');
+			form.name.focus();
+			return false;
+		}
+		if (form.mobile.value == '') {
+			alert('专家电话不能为空！');
+			form.mobile.focus();
+			return false;
+		}
+		if (form.place.value == '') {
+			alert('专家擅长领域不能为空！');
+			form.place.focus();
+			return false;
+		}
+		if (form.content.value == '') {
+			alert('专家简介不能为空！');
+			form.content.focus();
+			return false;
+		}
+		if (isNaN(form.mobile.value)) {
+			alert('请输入正确的电话号码！');
+			form.mobile.focus();
+			return false;
+		}
+		var reg = /^1[34578][0-9]{9}$/;
+		if (!reg.test(form.mobile.value)) {
+			alert('请输入正确的电话号码！');
+			form.mobile.focus();
+			return false;
+		}
+
+		return true;
+
+	}
+</script>

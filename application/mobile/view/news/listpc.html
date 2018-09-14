@@ -1,0 +1,113 @@
+ {include file="common/top"}
+<!--center-->
+<div class="main_c">
+	<div class="main" id="content">
+
+		<!-- 内容部分 -->
+		<div class="sp_content" id="contentLeft">
+			<div class="sp_banner">
+				<div class="banner"></div>
+				<script type="text/javascript">
+					var atmdateA = [{
+						"is_url": "0",
+						"url_controller": "",
+						"url_action": "",
+						"url_para": "#",
+						"pic_path": "",
+						"title": "banner",
+						"href": "/index/news/info.html?id={$recommend1.id}",
+						"url": "__IMAGE__/{$recommend1.image}"
+					}, {
+						"is_url": "0",
+						"url_controller": "",
+						"url_action": "",
+						"url_para": "#",
+						"pic_path": "",
+						"title": "banner",
+						"href": "/index/news/info.html?id={$recommend2.id}",
+						"url": "__IMAGE__/{$recommend2.image}"
+					}];
+					$(document).ready(function() {
+						var bannerShow = new Atm();
+						bannerShow.slide(atmdateA, ".banner", "520", "350");
+					});
+				</script>
+				<div class="itao">
+					<ul>
+
+						<!-- {foreach $recommend as $vo} -->
+						<li>
+							<a title="" href="/index/news/info.html?id={$vo.id}">
+								<img src="__IMAGE__/{$vo.image}" />
+								<span>{$vo.name}</span>
+								<h2>{$vo.abstract}</h2>
+							</a>
+						</li>
+						<!-- {/foreach} -->
+					</ul>
+				</div>
+			</div>
+			<div class="content">
+				<ul class="newslist">
+					<!-- {foreach $news as $vo} -->
+					<li>
+						<div>
+							<a title="" href="/index/news/info.html?id={$vo.id}">
+								<img src="__IMAGE__/{$vo.image}" alt="" height="160" width="225">
+							</a>
+						</div>
+						<div>
+							<a title="" href="/index/news/info.html?id={$vo.id}">{$vo.title}</a>
+							 <p>{$vo.abstract}</p> 
+							<p>
+								 <a>{$vo.name}</a> 
+								 <a>{$vo.author}</a> 
+								<span>{$vo['time']|date="Y-m-d",###}</span>
+							</p>
+						</div>
+					</li>
+					<!-- {/foreach} -->
+				</ul>
+				<div class="paging" data-limit="{$limit}">
+					<input type="hidden" value="{$cate_id}" id='cate_id' />
+
+					<a class="next" href="javascript:void(0);">查看更多</a>
+				</div>
+			</div>
+		</div>
+		<!-- 内容部分 end-->
+
+		<!-- 右侧部分 -->
+		{include file="common/right"}
+		<!-- 右侧部分 end-->
+	</div>
+</div>
+<!--center end-->
+<script type="text/javascript">
+	$(".paging").click(function() {
+
+		var limit = $(this).data('limit');
+		var cate_id = $("#cate_id").val();
+		$(this).data('limit', limit + 1);
+		$.ajax({
+			type: 'GET',
+			url: '/index/news/more',
+			data: {
+				limit: limit,
+				cate_id:cate_id
+			},
+			success: function(result) {
+				if (result.code == 1) {
+					$(".newslist").append(result.data);
+				} else {
+					$(".paging").hide();
+				}
+			},
+			dataType: 'json'
+		});
+	})
+</script>
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

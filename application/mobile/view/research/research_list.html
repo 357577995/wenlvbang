@@ -1,0 +1,68 @@
+{include file="common/top"}
+<!--center-->
+<div class="main_c">
+	<div class="main" id="content">
+
+		<!-- 内容部分 -->
+		<div class="content wlyj">
+			<ul class="newslist">
+				<!-- {foreach $message as $message} -->
+				<li>
+					<div>
+						<a title="" href="/index/message/researchinfo.html?id={$message.id}">
+							<img src="__IMAGE__/{$message.image}" alt="" height="195" width="135">
+						</a>
+					</div>
+					<div>
+						<a title="" href="/index/message/researchinfo.html?id={$message.id}">{$message.title}</a>
+						<p>{$message.content}</p>
+					</div>
+					<div>
+						<p>
+							<a href="/index/message/researchinfo.html?id={$message.id}">查看详情</a>
+						</p>
+					</div>
+				</li>
+				<!-- {/foreach} -->
+			</ul>
+			<div class="c"></div>
+			<div class="paging" data-limit="{$limit}">
+				<input type="hidden" value="{$cate_id}" id='cate_id' />
+
+				<a class="next" href="javascript:void(0);">查看更多</a>
+			</div>
+		</div>
+		<!-- 内容部分 end-->
+
+	</div>
+</div>
+<!--center end-->
+<script type="text/javascript">
+	$(".paging").click(function() {
+
+		var limit = $(this).data('limit');
+		var cate_id = $("#cate_id").val();
+
+		$(this).data('limit', limit + 1);
+		$.ajax({
+			type: 'GET',
+			url: '/index/research/more',
+			data: {
+				limit: limit,
+				cate_id: cate_id
+			},
+			success: function(result) {
+				if (result.code == 1) {
+					$(".result_list").append(result.data);
+				} else {
+					$(".paging").hide();
+				}
+			},
+			dataType: 'json'
+		});
+	})
+</script>
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录页面</title>
+</head>
+<body>
+	<form action="/index/login/login" method="post">
+		用户名：<input type="text" name="username" id="username">
+		密码：<input type="password" name="password" id="password">
+		验证码：<input type="text" name="code" id="code">
+		{:captcha_img()}
+		<input type="submit" value="提交">
+	</form>
+</body>
+</html>

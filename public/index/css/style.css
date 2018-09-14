@@ -1,0 +1,120 @@
+.pt1{padding-top: 1rem;}
+div.mt3{margin-top: 3.4rem;}
+div.mt6{margin-top: 6.1rem;}
+/*详细页*/
+.detail_class{width: 100%; height: 2.7rem;border-bottom:#DDD solid 1px;overflow-x: scroll;overflow-y: hidden;white-space: nowrap; background: #FFF; position: fixed;top: 3.3rem;z-index:10;}
+.detail_class ul{width:1000%;}
+.detail_class ul li{width:auto;float: left;height: 2.4rem;line-height: 2.4rem;text-align: center;margin: .2rem 1rem 0;padding: 0 .4rem;}
+.detail_class ul li.sel,.cont_title ul li:focus{border-bottom:#eb9727 solid 1px;}
+.detail_class ul li a{ color: #caa466;font-size: 1.2rem;}
+
+.detail_class select{width: 30%; float: left;border: none;margin:0 10%;height:2.7rem;color: #caa466;}
+.detail_class select option{color: #caa466;}
+
+.detail_title{width: 92%; margin: 0 auto;border-bottom: #EEE solid 1px; margin-top: 6.8rem;}
+.detail_title h1{width: 100%; font-size: 1.3rem;line-height:1.8rem;font-weight:600;margin: .7rem 0}
+.detail_title p{color: #999;height: 2rem;}
+.detail_title p span{float: left;}
+.detail_title p span:nth-child(2){float: right;}
+
+.detail_text{width: 92%; margin: 0 auto;line-height: 1.8rem;border-bottom: #EEE solid 1px;padding: .5rem 0;}
+.detail_text img{width:100%}
+
+.detail_label{width: 92%; margin: 0 auto;line-height: 1.8rem;border-bottom: #EEE solid 1px;padding: 0 0 .5rem}
+.detail_label h1{font-size: 1.2rem;font-weight: 400; line-height: 3rem;}
+.detail_label p{}
+.detail_label p a{ border: #DDD solid 1px;padding: .3rem .5rem;margin: .3rem;line-height:1.7rem;display: inline-block;}
+
+.detail_prev{width: 92%; margin: 0 auto;line-height: 1.8rem;border-bottom: #EEE solid 1px;padding: .5rem 0;}
+.detail_prev span{}
+.detail_prev a{ color: #caa466;}
+
+.detail_commend{width: 92%; margin: 0 auto;line-height: 1.8rem;border-bottom: #EEE solid 1px;padding: 0 0 .5rem}
+.detail_commend h1{font-size: 1.2rem;font-weight: 400; line-height: 3rem;}
+.detail_commend a{ color: #caa466;position:relative;width: 100%;display: block;}
+.detail_commend a img{width: 100%;}
+.detail_commend a div.b{width: 100%; height: 4rem; line-height: 2rem; margin-top: -4rem; opacity:0.7;background-color:#000;}
+.detail_commend a div.t{display: block;width: 96%;margin:-4rem 0 0;padding: 0.3rem 2%; height: 3.3rem; line-height: 1.5rem; z-index: 2;color: #FFF;opacity:1; position:absolute;}
+
+.detail_baoming{position: fixed;top: 14rem;right: 0;}
+.detail_baoming img{width: 60%;}
+
+.detail_form{display: none;}
+/*列表页*/
+.bgeee{background: #EEE;}
+.detail_list_bg{width: 100%;background:#EEE;margin-top:6.1rem;}
+.detail_list{width: 92%; margin: 0 auto;padding-top: 1rem;display: grid;}
+.detail_list ul li{width: 100%;background: #FFF;margin-bottom: 1rem;padding-bottom: .8rem;position: relative;}
+.detail_list ul li a img{width: 100%;}
+.detail_list ul li a div{position: absolute;top:.15rem;right: 0;}
+.detail_list ul li a div span{background: #f7921e; color: #FFF;padding: .2rem .5rem;}
+.detail_list ul li a p{height: 1.4rem; line-height: 1.4rem;margin: .7rem 0 0 1rem;font-size: 1.2rem;color: #caa466;padding: 0 .5rem 0;border-left:#caa466 solid 3px;}
+
+.detail_list_news{width: 92%;margin: 0 auto;}
+.detail_list_news ul li{padding: .6rem 0;width: 100%;height: 5.6rem;border-bottom: #EEE solid 1px;}
+.detail_list_news ul li div{ width:65%;float: left;}
+.detail_list_news ul li img{width: 33%;float: right; height: 5.5rem;}
+.detail_list_news ul li h3{width: 100%; font-size: 1.2rem;line-height:1.8rem;height:3.6rem;overflow: hidden; font-weight:400;}
+.detail_list_news ul li p{color: #999;height: 2rem;padding-top: .5rem;}
+.detail_list_news ul li p span{float: left;color: #b2a378;}
+.detail_list_news ul li p span:nth-child(2){float: right;color: #999;}
+
+.xqlist ul li a p{border: none;color: #000;padding-left: 0;}
+.xqlist ul li a p{}
+.xqlist ul li a p span{line-height: 1.4rem;}
+.xqlist ul li a p span:nth-child(2){float: right;}
+.xqlist ul li a p span img{ width: 1.4rem;padding-right: .3rem;}
+
+.rzlist{}
+.rzlist ul li{width: 96%;padding:0 1% .5rem 3%;}
+.rzlist h2{line-height:3rem;font-size: 1.4rem;}
+.rzlist ul li a p{border: none;padding: 0.3rem 0;margin: 0;color: #000;height: auto; line-height: 1.6rem;}
+.rzlist ul li a p span{display: block;width: 50%; float: left;padding-bottom: .5rem;}
+.rzlist ul li a p.lr{text-align: right}
+.rzlist b{color:#caa466;font-weight: 400;padding-right: .5rem;}
+
+.uclist{margin-top: 6.9rem;}
+.uclist ul{width: 100%;}
+.uclist ul li{border-bottom: #EEE solid 1px; background: #FFF;}
+.uclist ul .new_class{background:#FFF; margin: .6rem .1rem .5rem .5rem;}
+.uclist ul .new_class img{width: 1.3rem;}
+.uclist ul .time{width: 1.3rem;}
+.uclist ul .time img{width: .6rem; vertical-align:middle}
+
+/*个人中心*/
+.uc_t{text-align: center;color: #FFF;font-size: 1.8rem;line-height:2rem;}
+.uc_lk{text-align: center;line-height: 3rem;}
+/*表单*/
+.uc_form{}
+.uc_form ul li{ width: 94%; padding: 0 3%;height: 3rem; line-height: 3rem;border-bottom: #efefef solid 1px;}
+.uc_form ul li span{ width: 6rem;float: left;}
+.uc_form ul li input,.uc_form ul li select{ width: 15rem;float: left;margin-top: .5rem;border: #efefef solid 1px; height: 2rem;}
+.uc_form ul li input,.uc_form ul li.tex textarea{background: #efefef;border: none;}
+.uc_form ul li select{width: 15.2rem;}
+.uc_form ul li.tex{  height: 19rem;border-bottom:none;}
+.uc_form ul li.tex span{ width:100%;float: none;}
+.uc_form ul li.tex textarea{ width:100%; height: 14rem; float: none;}
+.sub{ border: none;}
+.uc_form ul li.sub input,.sub input{ width: 90%;margin:0 5%; background: #f7921e;  height: 3rem;border:none; color: #FFF;font-size: 1.4rem; border-radius: .2rem;}
+
+.uc_form_reg{width: 80%;margin: 0 10%;padding-top: 1rem;}
+.uc_form_reg ul li{padding: .2rem 0;height: 3rem; }
+.uc_form_reg ul li input{width: 100%;border: none;border-bottom: #efefef solid 1px; height: 3rem; line-height: 3rem;}
+.uc_form_reg ul li.sub{height: 6rem;}
+.uc_form_reg ul li.sub input{ background: #f7921e;margin: 0;margin-top: 2rem;}
+/*登陆*/
+.dl{background: #FFF;margin-top:.5rem;height: 4rem; position: relative;}
+.dl .editor-icon a{font-size: 1.4rem;}
+.uc_form_reg .mimaimg{display: block;margin-top: -2.5rem;margin-left: 88%; width: 2.5rem;}
+.uc_form_reg .lk a{float: left; color: #999;}
+.uc_form_reg .lk a:nth-child(2){float: right; color: #999;}
+.uc_form_reg .dtm input{width: 70%; float: left;}
+.uc_form_reg .dtm input:nth-child(2){width: 30%;background: #FFF;}
+.uc_form_reg .yzm span{width:4rem; float: left; line-height: 3rem;}
+.uc_form_reg .yzm input{width:6rem; float: left;border: #DDD solid 1px; height:2rem;margin-top:.5rem;}
+
+
+
+
+
+

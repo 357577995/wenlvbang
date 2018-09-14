@@ -1,0 +1,41 @@
+{include file="common/top"}
+<!--top end-->
+<!--内容区域 start-->
+<div class="detail_class">
+	<select id="province">
+		<option>一级分类</option>
+		<!-- {foreach  item='vo' name='cate' key='k'} -->
+		<option>{$vo.name}</option>
+		<!-- {/foreach} -->
+	</select>
+	<select class="city">
+		<option>二级分类</option>
+	</select>
+	<!-- {foreach  item='vo' name='cate' key='k'} -->
+	<select class="city">
+		<!-- {foreach $vo.c_cate as $c_vo} -->
+		<option><a href="/mobile/category/list?id={$c_vo.id}">{$c_vo.name}</a></option>
+		<!-- {/foreach} -->
+	</select>
+	<!-- {/foreach} -->
+	<script src="__INDEX__/js/liandong.js" type="text/javascript"></script>
+</div>
+<div class="detail_title">
+	<h1>{$plan.name}</h1>
+</div>
+<div class="detail_text">{$plan.content}</div>
+<!-- {if $last} -->
+<div class="detail_prev">
+	<span>上一篇：</span>
+	<a  href="/mobile/category/info?id={$next.id}">{$next.name}</a>
+	</p>
+</div>
+<!-- {/if} -->
+<!-- {if $next} -->
+<div class="detail_prev">
+	<span>下一篇：</span>
+	<a  href="/mobile/category/info?id={$next.id}">{$next.name}</a>
+	</p>
+</div>
+<!-- {/if} -->
+{include file="common/foot"}

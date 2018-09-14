@@ -1,0 +1,44 @@
+{extend name="base" /}
+{block name="title"}创建订单{/block}
+{block name="body"}
+	
+	<h3 style="text-align:center">创建订单</h3>
+
+	<div style="border:1px solid #ccc;width:40%;margin-left:auto;margin-right:auto;">
+		<form action="/index/order/confirm" method="post">
+			<div>项目标题：<input type="text" name="title" id="title" style="width:257px;height:35px;"></div>
+			<div>项目简述：<textarea name="resume" id="resume" cols="30" rows="4"></textarea></div>
+			<div>
+				<h5>方案信息</h5>
+				<table>
+					<tr>
+						<td width="200">方案名称</td>
+						<td width="250">图片</td>
+					</tr>
+					{foreach $cart as $k=>$vo}
+					<tr >
+						<td>{$vo.plan_name}</td>
+						<td><img src="__IMAGE__{$vo.image}" alt="" width="100"></td>
+					</tr>
+					{/foreach}
+				</table>
+			</div>
+			<input type="submit" value="确认" onclick="return btn()">
+		</form>
+	</div>
+<script type="text/javascript" src="__INDEX__/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	function btn(){
+		var title = $('#title').val();
+		var resume = $('#resume').val();
+		if(title==''){
+			alert('请填写项目标题');
+			return false;
+		}
+		if(resume==''){
+			alert('请填写项目简述');
+			return false;
+		}
+	}
+</script>
+{/block}

@@ -1,0 +1,68 @@
+{include file="common/top"}
+
+<!--center-->
+<div class="main_c">
+	<div class="main" id="content">
+
+		<!-- 内容部分 -->
+		<div class="sp_content" id="contentLeft">
+			 
+			<div class="content">
+				<ul class="newslist">
+				<!-- {foreach $investment as $investment} -->
+			<li style=" padding-left:10px;padding-top:10px; height:150px;">
+ 					<h2>
+						<b>{$investment.name}</b>
+					</h2>
+					<p class="lr">
+						 发布时间：{$investment['time']|date="Y-m-d",###} 
+					</p> 
+					<p> 
+
+						<b>项目介绍：</b>
+						{$investment.content}
+					</p>
+					
+ 			</li>
+			<!-- {/foreach} -->
+				</ul>
+				<div class="paging" data-limit="{$limit}">
+					<input type="hidden" value="{$cate_id}" id='cate_id' />
+					<a class="next" href="javascript:void(0);">查看更多</a>
+				</div>
+			</div>
+		</div>
+		<!-- 内容部分 end-->
+
+		{include file="common/right"}
+	</div>
+</div>
+<!--center end-->
+<script type="text/javascript">
+	$(".paging").click(function() {
+
+		var limit = $(this).data('limit');
+		var cate_id = $("#cate_id").val();
+		$(this).data('limit', limit + 1);
+		$.ajax({
+			type: 'GET',
+			url: '/index/investment/more',
+			data: {
+				limit: limit,
+				cate_id:cate_id
+			},
+			success: function(result) {
+				if (result.code == 1) {
+					$(".newslist").append(result.data);
+				} else {
+					$(".paging").hide();
+				}
+			},
+			dataType: 'json'
+		});
+	})
+</script>
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

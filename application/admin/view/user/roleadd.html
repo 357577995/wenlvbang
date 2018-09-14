@@ -1,0 +1,292 @@
+﻿{extend name="base" /}
+{block name="title"}添加角色{/block}
+{block name="body"}
+<link rel="stylesheet" href="__ADMIN__/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 角色管理 <span class="c-gray en">&gt;</span> 添加角色 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<div>
+			<div class="pd-20">
+				<div class="mt-20">
+				<form action="/admin/user/roleinsert" method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data">
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>角色名称：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" class="input-text" value="" placeholder="" id="name" name="name">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">描述：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" class="input-text" value="" placeholder="" id="content" name="content">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">网站角色：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<dl class="permission-list">
+								<dt><label><input type="checkbox" value="" id="cate" > 业态管理</label></dt>
+								<dd><dl class="cl permission-list2"><dd>
+									<label class=""><input type="checkbox" value="cate_add" id="cate1" name="role[]" > 添加分类</label>
+									<label class=""><input type="checkbox" value="cate_edit" id="cate2" name="role[]" > 修改分类</label>
+									<label class=""><input type="checkbox" value="cate_del" id="cate3" name="role[]" > 删除分类</label>
+									<label class=""><input type="checkbox" value="cate_list" id="cate4" name="role[]" > 查看分类</label>
+									<label class=""><input type="checkbox" value="cate_param" id="cate5" name="role[]" > 分类参数管理</label>
+								</dd></dl></dd>
+							</dl>
+							<dl class="permission-list">
+								<dt><label><input type="checkbox" value="" id="plan" > 方案库</label></dt>
+								<dd><dl class="cl permission-list2"><dd>
+									<label class=""><input type="checkbox" value="plan_list" id="plan1" name="role[]" > 查看方案</label>
+									<label class=""><input type="checkbox" value="plan_del" id="plan2" name="role[]" > 删除方案</label>
+									<label class=""><input type="checkbox" value="plan_do" id="plan3" name="role[]" > 审核</label>
+								</dd></dl></dd>
+							</dl>
+							<dl class="permission-list">
+								<dt><label><input type="checkbox" value="" id="order" > 方案订单</label></dt>
+								<dd><dl class="cl permission-list2"><dd>
+									<label class=""><input type="checkbox" value="order_list" id="order1" name="role[]" > 查看订单</label>
+									<label class=""><input type="checkbox" value="order_del" id="order2" name="role[]" > 删除订单</label>
+									<label class=""><input type="checkbox" value="order_do" id="order3" name="role[]" > 审核</label>
+								</dd></dl></dd>
+							</dl>
+							<dl class="permission-list">
+								<dt><label><input type="checkbox" value="" id="user_zong" > 会员管理</label></dt>
+								<dd>
+									<dl class="cl permission-list2">
+										<dt><label class=""><input type="checkbox" value="" id="user" > 普通会员</label></dt>
+										<dd>
+											<label class=""><input type="checkbox" value="user_add" id="user1" name="role[]" > 添加会员</label>
+											<label class=""><input type="checkbox" value="user_del" id="user2" name="role[]" > 删除会员</label>
+											<label class=""><input type="checkbox" value="user_edit" id="user3" name="role[]" > 修改会员</label>
+											<label class=""><input type="checkbox" value="user_list" id="user4" name="role[]" > 查看会员</label>
+										</dd>
+									</dl>
+									<dl class="cl permission-list2">
+										<dt><label class=""><input type="checkbox" value="" id="project_user" > 项目方</label></dt><dd>
+											<label class=""><input type="checkbox" value="project_user_add" id="project_user1" name="role[]" > 添加项目方</label>
+											<label class=""><input type="checkbox" value="project_user_del" id="project_user2" name="role[]" > 删除项目方</label>
+											<label class=""><input type="checkbox" value="project_user_edit" id="project_user3" name="role[]" > 修改项目方</label>
+											<label class=""><input type="checkbox" value="project_user_list" id="project_user4" name="role[]" > 查看项目方</label>
+											<label class=""><input type="checkbox" value="project_user_do" id="project_user5" name="role[]" > 审核</label>
+										</dd>
+									</dl>
+									<dl class="cl permission-list2">
+										<dt><label class=""><input type="checkbox" value="" id="service_user" > 服务商</label></dt><dd>
+											<label class=""><input type="checkbox" value="service_user_add" id="service_user1" name="role[]" > 添加服务商</label>
+											<label class=""><input type="checkbox" value="service_user_del" id="service_user2" name="role[]" > 删除服务商</label>
+											<label class=""><input type="checkbox" value="service_user_edit" id="service_user3" name="role[]" > 修改服务商</label>
+											<label class=""><input type="checkbox" value="service_user_list" id="service_user4" name="role[]" > 查看服务商</label>
+											<label class=""><input type="checkbox" value="service_user_do" id="service_user5" name="role[]" > 审核</label>
+										</dd>
+									</dl>
+								</dd>
+							</dl>
+							<dl class="permission-list">
+								<dt><label><input type="checkbox" value="" id="new" > 新闻资讯</label></dt>
+								<dd><dl class="cl permission-list2"><dd>
+									<label class=""><input type="checkbox" value="new_cate" id="new1"  name="role[]" > 分类管理</label>
+									<label class=""><input type="checkbox" value="new_add" id="new2"  name="role[]" > 添加资讯</label>
+									<label class=""><input type="checkbox" value="new_del" id="new3"  name="role[]" > 删除资讯</label>
+									<label class=""><input type="checkbox" value="new_edit" id="new4"  name="role[]" > 修改资讯</label>
+									<label class=""><input type="checkbox" value="new_list" id="new5"  name="role[]" > 查看资讯</label>
+								</dd></dl></dd>
+							</dl>
+							<dl class="permission-list">
+								<dt><label><input type="checkbox" value="" id="expert" > 专家管理</label></dt>
+								<dd><dl class="cl permission-list2"><dd>
+									<label class=""><input type="checkbox" value="expert_add" id="expert1" name="role[]" > 添加专家</label>
+									<label class=""><input type="checkbox" value="expert_del" id="expert2" name="role[]" > 删除专家</label>
+									<label class=""><input type="checkbox" value="expert_edit" id="expert3" name="role[]" > 修改专家</label>
+									<label class=""><input type="checkbox" value="expert_list" id="expert4" name="role[]" > 查看专家</label>
+								</dd></dl></dd>
+							</dl>
+							<dl class="permission-list">
+								<dt><label><input type="checkbox" value="" id="message" > 实战营</label></dt>
+								<dd><dl class="cl permission-list2"><dd>
+									<label class=""><input type="checkbox" value="message_cate" id="message1" name="role[]" > 分类管理</label>
+									<label class=""><input type="checkbox" value="message_add" id="message2" name="role[]" > 添加信息</label>
+									<label class=""><input type="checkbox" value="message_del" id="message3" name="role[]" > 删除信息</label>
+									<label class=""><input type="checkbox" value="message_edit" id="message4" name="role[]" > 修改信息</label>
+									<label class=""><input type="checkbox" value="message_list" id="message5" name="role[]" > 查看信息</label>
+									<label class=""><input type="checkbox" value="message_form" id="message6" name="role[]" > 报名表单管理</label>
+									<label class=""><input type="checkbox" value="message_user" id="message6" name="role[]" > 报名会员管理</label>
+								</dd></dl></dd>
+							</dl>
+							<dl class="permission-list">
+								<dt><label><input type="checkbox" value="" id="investment" > 投融项目管理</label></dt>
+								<dd><dl class="cl permission-list2"><dd>
+									<label class=""><input type="checkbox" value="investment_cate" id="investment1" name="role[]" > 分类管理</label>
+									<label class=""><input type="checkbox" value="investment_add" id="investment2" name="role[]" > 添加项目</label>
+									<label class=""><input type="checkbox" value="investment_del" id="investment3" name="role[]" > 删除项目</label>
+									<label class=""><input type="checkbox" value="investment_edit" id="investment4" name="role[]" > 修改项目</label>
+									<label class=""><input type="checkbox" value="investment_list" id="investment5" name="role[]" > 查看项目</label>
+								</dd></dl></dd>
+							</dl>
+							<dl class="permission-list">
+								<dt><label><input type="checkbox" value="" id="project" > 帮空间</label></dt>
+								<dd><dl class="cl permission-list2"><dd>
+									<label class=""><input type="checkbox" value="project_cate" id="project1" name="role[]" > 分类管理</label>
+									<label class=""><input type="checkbox" value="project_add" id="project2" name="role[]" > 添加信息</label>
+									<label class=""><input type="checkbox" value="project_del" id="project3" name="role[]" > 删除信息</label>
+									<label class=""><input type="checkbox" value="project_edit" id="project4" name="role[]" > 修改信息</label>
+									<label class=""><input type="checkbox" value="project_list" id="project5" name="role[]" > 查看信息</label>
+								</dd></dl></dd>
+							</dl>
+							<dl class="permission-list">
+								<dt><label><input type="checkbox" value="" id="admin_user" > 管理员管理</label></dt>
+								<dd><dl class="cl permission-list2"><dd>
+									<label class=""><input type="checkbox" value="admin_user_add" id="admin_user1" name="role[]" > 添加管理员</label>
+									<label class=""><input type="checkbox" value="admin_user_del" id="admin_user2" name="role[]" > 删除管理员</label>
+									<label class=""><input type="checkbox" value="admin_user_edit" id="admin_user3" name="role[]" > 修改管理员</label>
+									<label class=""><input type="checkbox" value="admin_user_list" id="admin_user4" name="role[]" > 查看管理员</label>
+									<label class=""><input type="checkbox" value="admin_log" id="admin_user5" name="role[]" > 查看日志</label>
+									<label class=""><input type="checkbox" value="admin_role" id="admin_user6" name="role[]" > 角色管理</label>
+								</dd></dl></dd>
+							</dl>
+							<dl class="permission-list">
+								<dt><label><input type="checkbox" value="" id="config" > 系统管理</label></dt>
+								<dd><dl class="cl permission-list2"><dd>
+									<label class=""><input type="checkbox" value="config_edit" id="config1" name="role[]" > 修改信息</label>
+									<label class=""><input type="checkbox" value="config_list" id="config2" name="role[]" > 查看信息</label>
+								</dd></dl></dd>
+							</dl>
+						</div>
+					</div>
+					<div class="row cl" >
+						<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+							<button id="submits" class="btn btn-primary radius" type="submit" onclick="return validate()"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+						</div>
+					</div>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__INDEX__/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	//提交表单的事件监听  
+	function validate() {
+	    var username = $('#username').val();
+	    if(username==''){
+        	alert('用户名不能为空');
+        	return false;
+        }
+	}
+	//业态管理
+	$('#cate').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#cate1,#cate2,#cate3,#cate4,#cate5').prop('checked','checked');
+	    }else{
+	        $('#cate1,#cate2,#cate3,#cate4,#cate5').removeProp('checked');
+	    }
+	})
+	//方案库
+	$('#plan').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#plan1,#plan2,#plan3').prop('checked','checked');
+	    }else{
+	        $('#plan1,#plan2,#plan3').removeProp('checked');
+	    }
+	})
+	//方案订单
+	$('#order').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#order1,#order2,#order3').prop('checked','checked');
+	    }else{
+	        $('#order1,#order2,#order3').removeProp('checked');
+	    }
+	})
+	//普通会员
+	$('#user').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#user1,#user2,#user3,#user4').prop('checked','checked');
+	    }else{
+	        $('#user1,#user2,#user3,#user4').removeProp('checked');
+	    }
+	})
+	//项目方会员
+	$('#project_user').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#project_user1,#project_user2,#project_user3,#project_user4,#project_user5').prop('checked','checked');
+	    }else{
+	        $('#project_user1,#project_user2,#project_user3,#project_user4,#project_user5').removeProp('checked');
+	    }
+	})
+	//服务商会员
+	$('#service_user').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#service_user1,#service_user2,#service_user3,#service_user4,#service_user5').prop('checked','checked');
+	    }else{
+	        $('#service_user1,#service_user2,#service_user3,#service_user4,#service_user5').removeProp('checked');
+	    }
+	})
+	//总会员管理
+	$('#user_zong').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#user,#project_user,#service_user,#user1,#user2,#user3,#user4,#project_user1,#project_user2,#project_user3,#project_user4,#project_user5,#service_user1,#service_user2,#service_user3,#service_user4,#service_user5').prop('checked','checked');
+	    }else{
+	        $('#user,#project_user,#service_user,#user1,#user2,#user3,#user4,#project_user1,#project_user2,#project_user3,#project_user4,#project_user5,#service_user1,#service_user2,#service_user3,#service_user4,#service_user5').removeProp('checked');
+	    }
+	})
+	//新闻资讯
+	$('#new').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#new1,#new2,#new3,#new4,#new5').prop('checked','checked');
+	    }else{
+	        $('#new1,#new2,#new3,#new4,#new5').removeProp('checked');
+	    }
+	})
+	//专家管理
+	$('#expert').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#expert1,#expert2,#expert3,#expert4').prop('checked','checked');
+	    }else{
+	        $('#expert1,#expert2,#expert3,#expert4').removeProp('checked');
+	    }
+	})
+	//实战营管理
+	$('#message').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#message1,#message2,#message3,#message4,#message5,#message6').prop('checked','checked');
+	    }else{
+	        $('#message1,#message2,#message3,#message4,#message5,#message6').removeProp('checked');
+	    }
+	})
+	//投融项目管理
+	$('#investment').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#investment1,#investment2,#investment3,#investment4,#investment5').prop('checked','checked');
+	    }else{
+	        $('#investment1,#investment2,#investment3,#investment4,#investment5').removeProp('checked');
+	    }
+	})
+	//帮空间管理
+	$('#project').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#project1,#project2,#project3,#project4,#project5').prop('checked','checked');
+	    }else{
+	        $('#project1,#project2,#project3,#project4,#project5').removeProp('checked');
+	    }
+	})
+	//管理员管理
+	$('#admin_user').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#admin_user1,#admin_user2,#admin_user3,#admin_user4,#admin_user5,#admin_user6').prop('checked','checked');
+	    }else{
+	        $('#admin_user1,#admin_user2,#admin_user3,#admin_user4,#admin_uesr5,#admin_user6').removeProp('checked');
+	    }
+	})
+	//系统管理
+	$('#config').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('#config1,#config2').prop('checked','checked');
+	    }else{
+	        $('#config1,#config2').removeProp('checked');
+	    }
+	})
+
+</script>
+{/block}

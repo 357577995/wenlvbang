@@ -1,0 +1,75 @@
+{include file="common/top"}
+
+<!--center-->
+<div class="main_c">
+	<div class="main" id="content">
+
+		<!-- 内容部分 -->
+		<div class="sp_content" id="contentLeft">
+			<div class="content wlzk">
+				<ul class="zjlist">
+					<!-- {foreach $expert as $expert} -->
+					<li>
+						<div>
+							<a title="" href=" " style="display:block; width:140px; height:140px; background:url(__IMAGE__{$expert.image}) no-repeat top center;      border-radius: 50%;
+    overflow: hidden;">
+								<!--<img src="__IMAGE__{$expert.image}" alt="" height="160" width="225">-->
+							</a>
+
+						</div>
+						<div>
+							<a title="" href=" ">{$expert.name}</a>  
+							 
+
+							<span>擅长领域：{$expert.place}</span>
+							<p>{$expert.content}</p>
+						</div>
+						<!--<div>
+							<p>
+								<a href="/index/expert/info.html?id={$expert.id}">详情</a>
+							</p>
+						</div>
+						-->
+					</li>
+					<!-- {/foreach} -->
+				</ul>
+				<div class="c"></div>
+				<div class="paging" data-limit="{$limit}">
+					<a class="next" href="javascript:void(0);">查看更多</a>
+				</div>
+			</div>
+		</div>
+		<!-- 内容部分 end-->
+
+		<!-- 右侧部分 -->
+		{include file="common/right_expert"}
+		<!-- 右侧部分 end-->
+	</div>
+</div>
+<!--center end-->
+<script type="text/javascript">
+	$(".paging").click(function() {
+
+		var limit = $(this).data('limit');
+		$(this).data('limit', limit + 1);
+		$.ajax({
+			type: 'GET',
+			url: '/index/expert/more',
+			data: {
+				limit: limit
+			},
+			success: function(result) {
+				if (result.code == 1) {
+					$(".zjlist").append(result.data);
+				} else {
+					$(".paging").hide();
+				}
+			},
+			dataType: 'json'
+		});
+	})
+</script>
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

@@ -1,0 +1,110 @@
+{include file="common/top"}
+
+<!--center-->
+<div class="main_c">
+	<div class="main" id="content">
+
+		<!-- 内容部分 -->
+		<div class="sp_content" id="contentLeft">
+			<div class="sp_banner">
+				<div class="banner"></div>
+				<script type="text/javascript">
+					var atmdateA = [{
+						"is_url": "0",
+						"url_controller": "",
+						"url_action": "",
+						"url_para": "#",
+						"pic_path": "",
+						"title": "banner",
+						"href": "/index/investment/info.html?id={$recommend1.id}",
+						"url": "__IMAGE__/index\/index_banner_end.png"
+					}, {
+						"is_url": "0",
+						"url_controller": "",
+						"url_action": "",
+						"url_para": "#",
+						"pic_path": "",
+						"title": "banner",
+						"href": "/index/investment/info.html?id={$recommend2.id}",
+						"url": "__IMAGE__/index\/index_banner_end.png"
+					}];
+					$(document).ready(function() {
+						var bannerShow = new Atm();
+						bannerShow.slide(atmdateA, ".banner", "520", "350");
+					});
+				</script>
+				<div class="itao">
+					<ul>
+						<!-- {foreach $recommend as $vo} -->
+						<li>
+							<a title="" href="/index/investment/info.html?id={$vo.id}">
+								<img src="__IMAGE__/index\/index_banner_end.png" />
+								<h2>{$vo.content}</h2>
+							</a>
+						</li>
+						<!-- {/foreach} -->
+					</ul>
+				</div>
+			</div>
+			<div class="content">
+				<ul class="newslist">
+					<!-- {foreach $investment as $investment} -->
+			<li>
+				<a href="javascript:void(0);">
+					<h2>
+						<b>{$investment.name}</b>
+					</h2>
+					<p>
+						<span> {$investment.fu_title} </span>
+					</p>
+					<p>
+						<b>项目介绍：</b>
+						{$investment.content}
+					</p>
+					<p class="lr">
+						<b>{$investment['time']|date="Y-m-d",###}</b>
+					</p>
+				</a>
+			</li>
+			<!-- {/foreach} -->
+				</ul>
+				<div class="paging" data-limit="{$limit}">
+					<input type="hidden" value="{$cate_id}" id='cate_id' />
+					<a class="next" href="javascript:void(0);">查看更多</a>
+				</div>
+			</div>
+		</div>
+		<!-- 内容部分 end-->
+
+		{include file="common/right"}
+	</div>
+</div>
+<!--center end-->
+<script type="text/javascript">
+	$(".paging").click(function() {
+
+		var limit = $(this).data('limit');
+		var cate_id = $("#cate_id").val();
+		$(this).data('limit', limit + 1);
+		$.ajax({
+			type: 'GET',
+			url: '/index/investment/more',
+			data: {
+				limit: limit,
+				cate_id:cate_id
+			},
+			success: function(result) {
+				if (result.code == 1) {
+					$(".newslist").append(result.data);
+				} else {
+					$(".paging").hide();
+				}
+			},
+			dataType: 'json'
+		});
+	})
+</script>
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

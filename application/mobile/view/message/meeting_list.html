@@ -1,0 +1,43 @@
+{include file="common/top"}
+
+<!--center-->
+<div class="main_c">
+	<div class="main" id="content">
+		<!-- 内容部分 -->
+		<div class="pro_list wlhd">
+			<ul>
+				<!-- {foreach $message as $message} -->
+				<li>
+					<div class="pro_pic">
+						<a href="/index/message/meetinginfo.html?id={$message.id}" title="">
+							<img src="__IMAGE__/{$message.image}" alt="">
+						</a>
+						<span>2018.夏</span>
+					</div>
+					<div class="pro_c">
+						<a href="/index/message/meetinginfo.html?id={$message.id}" title="">
+							<h2>{$message.title}</h2>
+							<span {if $message.status==2}class='js'{/if}>{$message.status_message}</span>
+						</a>
+						<div>{$message.content}</div>
+					</div>
+					<div class="pro_ico">
+						<a href="/index/message/meetinginfo.html?id={$message.id}">更多&gt;&gt;</a>
+					</div>
+				</li>
+				<!-- {/foreach} -->
+			</ul>
+			<div class="c"></div>
+			<div class="paging">
+				<a class="next" href="/index/message/meeting.html?more=1">查看更多</a>
+			</div>
+		</div>
+		<!-- 内容部分 end-->
+	</div>
+</div>
+<!--center end-->
+
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

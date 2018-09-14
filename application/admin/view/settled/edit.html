@@ -1,0 +1,129 @@
+﻿{extend name="base" /}
+{block name="title"}查看项目方{/block}
+{block name="body"}
+<link rel="stylesheet" href="__ADMIN__/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="__ADMIN__/region.js"></script>
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 项目方管理 <span class="c-gray en">&gt;</span> 查看项目方 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<div>
+			<div class="pd-20">
+				<div class="mt-20">
+				<form action="/admin/settled/update" method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data">
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>专家名称：</label>
+						<div class="formControls col-xs-8 col-sm-5">
+							<input type="text" class="input-text" value="{$list.name}" id="name" name="name">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>电话：</label>
+						<div class="formControls col-xs-8 col-sm-5">
+							<input type="text" class="input-text" value="{$list.mobile}" id="mobile" name="mobile">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>擅长领域：</label>
+						<div class="formControls col-xs-8 col-sm-5">
+							<input type="text" class="input-text" value="{$list.place}" id="place" name="place">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>头像：</label>
+						<div class="formControls col-xs-8 col-sm-5">
+							<img src="__IMAGE__{$list.image}" alt="" width="100">
+							<input type="file" name="image" id="image">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>简介：</label>
+						<div class="formControls col-xs-8 col-sm-5">
+							<input type="text" class="input-text" value="{$list.content}" id="content" name="content">
+						</div>
+					</div>
+					<input type="hidden" name="id" id="id" value="{$list.id}">
+					<div class="row cl" >
+						<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+							<button id="submits" class="btn btn-primary radius" type="submit" onclick="return validate()"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+						</div>
+					</div>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__INDEX__/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	//提交表单的事件监听  
+	function validate() {
+	    var username = $('#name').val();
+	    var email = $('#email').val();
+		var company_name = $('#company_name').val();
+		var contact = $('#contact').val();
+		var mobile = $('#mobile').val();
+		var address = $('#address').val();
+		var country = $('#select-1').val();
+		var province = $('#select-2').val();
+		var city = $('#select-3').val();
+		var district = $('#select-4').val();
+	    if(username==''){
+        	alert('用户名不能为空');
+        	return false;
+        }
+        if(mobile==''){
+        	alert('手机号不能为空');
+        	return false;
+        }
+       /*  if(mobile.match(/^1(3|4|5|7|8)\d{9}$/)==null){
+			alert('手机号格式不正确');
+			return false;
+		} */
+	}
+	//地址的选择
+	var region_id = 0;
+	function selectArea(type){
+	    region_id = $("#select-"+type+" option:selected").val();
+	    if(region_id == 0){
+	        if(type == 1){
+	            $("#select-2").html("<option value='0'>省直辖市</option>");
+	            $("#select-3").html("<option value='0'>市</option>");
+	            $("#select-4").html("<option value='0'>县区</option>");
+	            region_id = 0;
+	        }
+	        if(type == 2){
+	            $("#select-3").html("<option value='0'>市</option>");
+	            $("#select-4").html("<option value='0'>县区</option>");
+	            region_id = $("#select-1").val();
+	        }
+	        if(type == 3){
+	        	$("#select-4").html("<option value='0'>县区</option>");
+	            region_id = $("#select-2").val();
+	        }
+	        if(type == 4){
+	            region_id = $("#select-3").val();
+	        }
+	        return;
+	    }
+	    $.ajax({
+	        type:'POST',
+	        dataType:'json',
+	        data:{'region_id':region_id,'type':type},
+	        url:'/admin/project/changeArea3',
+	        success:function(data){
+                if(type == 1){
+                    $("#select-2").html(data);
+                    $("#select-3").html("<option value='0'>市</option>");
+                }
+                if(type == 2){
+                    $("#select-3").html(data);
+                }
+	            if(type == 3){
+                    $("#select-4").html(data);
+                }
+	        }
+	    })
+	}
+</script>
+{/block}

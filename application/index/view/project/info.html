@@ -1,0 +1,35 @@
+{include file="common/top"}
+<!-- 头部 end -->
+
+<!--center-->
+<div class="main_c">
+	<div class="main" id="content">
+
+		<!-- 内容部分 -->
+		<div class="sp_content" id="contentLeft">
+			<div class="content cpage">
+				<div class="c_crumb">
+					<a href="">首页</a>
+					&gt;
+					<a href="">帮空间</a>
+					&gt;
+					<a href="">{$cate_info.name}</a>
+				</div>
+				<h1 class="c_tit">{$project.title}</h1>
+				<div class="c_data">{$project['time']|date="Y-m-d",###}</div>
+				<div class="c_txt">{$project.content}</div>
+			</div>
+		</div>
+		<!-- 内容部分 end-->
+
+		<!-- 右侧部分 -->
+		{include file="common/right"}
+		<!-- 右侧部分 end-->
+	</div>
+</div>
+<!--center end-->
+
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

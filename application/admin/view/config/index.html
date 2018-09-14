@@ -1,0 +1,118 @@
+{extend name="base" /}
+{block name="title"}系统设置{/block}
+{block name="body"}
+<section class="Hui-article-box">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+		<span class="c-gray en">&gt;</span>
+		系统设置
+		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
+<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="page-container">
+			<form action="/admin/config/update" method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>公司名称：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" value="{$list.company_name}" id="company_name" name="company_name">
+					</div>
+				</div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>公司LOGO：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <img src="__INDEX__{$list.logo}" alt="" width="250">
+                        <input type="file" id="logo" name="logo">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>ICON图标：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <img src="__IMAGE__{$list.icon}" alt="" width="50">
+                        <input type="file" id="icon" name="icon">
+                    </div>
+                </div>
+				<div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>公司地址：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" value="{$list.company_address}" id="company_address" name="company_address">
+                    </div>
+                </div>
+				<div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>公司电话：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" value="{$list.company_mobile}" id="company_mobile" name="company_mobile">
+                    </div>
+                </div>
+               
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>传真：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" value="{$list.tel}" id="tel" name="tel">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>邮箱：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" value="{$list.email}" id="email" name="email">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>网址：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" value="{$list.html}" id="html" name="html">
+                    </div>
+                </div>
+				<div class="row cl" style="margin-top:100px;">
+					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+						<button id="submits" onclick="return yanzheng()" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		</article>
+	</div>
+</section>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+    function yanzheng(){
+        var company_name = $('#company_name').val();
+        var company_address = $('#company_address').val();
+        
+        var company_mobile = $('#company_mobile').val();
+        var tel = $('#tel').val();
+        var email = $('#email').val();
+        var html = $('#html').val();
+        
+
+        if(company_name==''){
+            alert('公司名称不能为空');
+            return false;
+        } 
+        if(company_address==''){
+            alert('公司地址不能为空');
+            return false;
+        } 
+        if(company_mobile==''){
+            alert('公司电话不能为空');
+            return false;
+        } 
+        
+        if(tel==''){
+            alert('传真不能为空');
+            return false;
+        } 
+        if(email==''){
+            alert('邮箱不能为空');
+            return false;
+        } 
+        if(html==''){
+            alert('网址不能为空');
+            return false;
+        }
+    }
+
+
+	
+	
+      
+</script>
+{/block}

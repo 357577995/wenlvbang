@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>用户登录</title>
+<link rel="stylesheet" type="text/css" href="__INDEX__/skin/child_cart.css">
+<link rel="stylesheet" type="text/css" href="__INDEX__/skin/child_atm.css">
+<link rel="stylesheet" type="text/css" href="__INDEX__/skin/master.css">
+<link rel="stylesheet" type="text/css" href="__INDEX__/skin/inside.css">
+<script type="text/javascript" src="__INDEX__/skin/jquery.js"></script>
+<script type="text/javascript" src="__INDEX__/skin/banner.js"></script>
+<script type="text/javascript" src="__INDEX__/skin/child_atm.js"></script>
+<script type="text/javascript" src="__INDEX__/skin/jQselect.js"></script>
+<script type="text/javascript" src="__INDEX__/skin/lihe.js"></script>
+<!--[if IE 6]>
+<script type="text/javascript" src="js/png.js"></script>
+<script>DD_belatedPNG.fix('div,img,span,li,a,a:hover,dd,p,input,select')</script>
+<![endif]-->
+</head>
+
+<body class="nobg">
+	<!-- 头部 -->
+	<div class="header">
+		<!-- logo -->
+		<div class="h_mid_c">
+			<div class="h_mid">
+				<div class="logo">
+					<a href="" class="fl">
+						<img src="__IMAGE__/index/logo.png">
+					</a>
+					<small class="fl">文旅IP业态集成平台</small>
+				</div>
+			</div>
+			<div class="c"></div>
+		</div>
+		<!-- logo end-->
+	</div>
+	<!-- 头部 end -->
+
+	<!--center-->
+	<div class="main_c">
+		<div class="main login">
+			<form action="/index/login/login" method="post">
+				<h1>登录</h1>
+				<input type="text" name="username" placeholder="请输入手机号/邮箱">
+				<input type="text" name="password" placeholder="请输入密码">
+				<a href="/index/register/index">
+					没有帐号?
+					<span>立即注册</span>
+				</a>
+				<input type="text" name="code" id="code" placeholder="验证码" />
+				<img id="verify_img" src="{:captcha_src()}" alt="验证码" onclick="refreshVerify()">
+				<span>手机号</span>
+				<input type="text" id='mobile' name="mobile" placeholder="请输入手机号">
+				<span>短信验证码</span>
+				<input type="text" name="sms_code" placeholder="请输入手机短信验证码" maxlength="6">
+				<input id="zphone" type="button" value=" 获取手机验证码 " class="hq" onClick="get_mobile_code()">
+				<input type="submit" class="sub" value="登录">
+			</form>
+		</div>
+	</div>
+	</div>
+	<!--center end-->
+	<script type="text/javascript">
+		function refreshVerify() {
+			var ts = Date.parse(new Date()) / 1000;
+			var img = document.getElementById('verify_img');
+			img.src = "/captcha?id=" + ts;
+		}
+		function get_mobile_code() {
+			var mobile = $('#mobile').val();
+			var code = $("#code").val()
+			if (isNaN(mobile)) {
+				alert('请输入正确的电话号码！');
+				form.mobile.focus();
+				return false;
+			}
+			var reg = /^1[34578][0-9]{9}$/;
+			if (!reg.test(mobile)) {
+				alert('请输入正确的电话号码！');
+				form.mobile.focus();
+				return false;
+			}
+			$.post('/index/register/sendsms', {
+				mobile: jQuery.trim(mobile),
+				send_code: code
+			}, function(msg) {
+				alert(jQuery.trim(unescape(msg)));
+				if (msg == '提交成功') {
+					RemainTime();
+				} else {
+					location.reload();
+				}
+			});
+		};
+		var iTime = 59;
+		var Account;
+		function RemainTime() {
+			document.getElementById('zphone').disabled = true;
+			var iSecond, sSecond = "", sTime = "";
+			if (iTime >= 0) {
+				iSecond = parseInt(iTime % 60);
+				iMinute = parseInt(iTime / 60)
+				if (iSecond >= 0) {
+					if (iMinute > 0) {
+						sSecond = iMinute + "分" + iSecond + "秒";
+					} else {
+						sSecond = iSecond + "秒";
+					}
+				}
+				sTime = sSecond;
+				if (iTime == 0) {
+					clearTimeout(Account);
+					sTime = '获取手机验证码';
+					iTime = 59;
+					document.getElementById('zphone').disabled = false;
+				} else {
+					Account = setTimeout("RemainTime()", 1000);
+					iTime = iTime - 1;
+				}
+			} else {
+				sTime = '没有倒计时';
+			}
+			document.getElementById('zphone').value = sTime;
+		}
+	</script>
+	<!-- footer -->
+	<div class="footclear"></div>
+	<div class="foot_end lg">©COPYRIGHT 2012 北京文旅帮科技发展有限公司 版权所有京ICP备15047706号-2</div>
+</body>
+</html>

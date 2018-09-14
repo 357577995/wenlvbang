@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link type="text/css" rel="stylesheet" href="__INDEX__/css/index.css">
+<link type="text/css" rel="stylesheet" href="__INDEX__/css/slide.css">
+<script src="__INDEX__/js/jquery.min.js"></script>
+<script src="__INDEX__/js/TouchSlide.1.1.js"></script>
+<link type="text/css" rel="stylesheet" href="__INDEX__/css/yd.css">
+<script src="__INDEX__/js/daohang.js" type="text/javascript"></script>
+<link rel="stylesheet" href="__INDEX__/css/daohang.css">
+<link rel="stylesheet" href="__INDEX__/css/style.css">
+<title>密码设置</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+</head>
+<body>
+	<div class="top" id="#top">
+		<div class="Menu-icon">
+			<a href="/mobile/user/edit" class="a_fanhui">
+				<img src="__IMAGE__/mobile/ico_l.png">
+			</a>
+		</div>
+		<div class="logo">
+			<span>密码设置</span>
+		</div>
+	</div>
+	<!--top end-->
+	<div class="clear-bg-eee mt3"></div>
+	<!--center-->
+	<div class="uc_form_reg">
+		<form action="/mobile/user/setPassword" method="post" onsubmit='return validate(this)'>
+			<ul>
+				<li>
+					<input value="" placeholder="密码（6-16位数字字母组合密码）" name='password' type='password'>
+				</li>
+				<li>
+					<input value="" placeholder="再次输入密码" name='repassword' type='password'>
+				</li>
+				<li class="sub">
+					<input type="submit" name="" value="提交">
+				</li>
+			</ul>
+		</form>
+	</div>
+	<script type="text/javascript">
+		function validate(form) {
+			if (form.password.value.length<6||form.password.value.length>166) {
+				alert('请输入6-16位的密码');
+				return false;
+			}
+			if (form.password.value != form.repassword.value) {
+				alert('输入的密码不一致');
+				return false;
+			}
+			return true;
+		}
+	</script>
+	<!--center end-->
+	<!--contact us end-->
+	{include file="common/foot"}

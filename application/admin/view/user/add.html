@@ -1,0 +1,91 @@
+{extend name="base" /}
+{block name="title"}添加管理员{/block}
+{block name="body"}
+<script type="text/javascript" charset="utf-8" src="__INDEX__/introduction/jquery.min.js"></script>
+<section class="Hui-article-box">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+		<span class="c-gray en">&gt;</span>
+		管理员管理
+		<span class="c-gray en">&gt;</span>
+		添加管理员 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
+<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="page-container">
+			<form action="/admin/user/insert" method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>用户名：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" value="" id="username" name="username">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>密码：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="password" class="input-text" value="" id="password" name="password">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>确认密码：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="password" class="input-text" value="" id="repassword" name="repassword">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>邮箱：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="email" class="input-text" value="" id="email" name="email">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>管理角色：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<select name="role_id" class="input-text">
+							<option value="">--请选择--</option>
+							{foreach $role as $k => $vo}
+							<option value="{$vo.id}">{$vo.name}</option>
+							{/foreach}
+						</select>
+					</div>
+				</div>
+                <div class="row cl" >
+					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+						<button id="submits" class="btn btn-primary radius" type="submit" onclick="return validate()"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		</article>
+	</div>
+</section>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+	
+    //提交表单的事件监听  
+	function validate() {
+	    var username = $('#username').val();
+	    var password = $('#password').val();
+	    var repassword = $('#repassword').val();
+	    var email = $('#email').val();
+	    if(username==''){
+        	alert('用户名不能为空');
+        	return false;
+        }
+        if(password==''){
+        	alert('密码不能为空');
+        	return false;
+        }
+        if(repassword==''){
+        	alert('确认密码不能为空');
+        	return false;
+        }
+        if(password != repassword){
+        	alert('两次密码不一致');
+        	return false;
+        }
+        if(email==''){
+        	alert('邮箱不能为空');
+        	return false;
+        }
+	}
+</script>
+{/block}

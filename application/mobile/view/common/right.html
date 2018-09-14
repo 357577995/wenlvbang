@@ -1,0 +1,57 @@
+
+<div class="sp_right" id="contentRight">
+
+	<div class="sub_common">
+		<div class="sub_common_title">
+			<h2>游学营</h2>
+			<a href="/index/activity/index.html" title="更多">更多</a>
+		</div>
+		<div class="sub_youhui_content ilist2">
+			<ul>
+				<!-- {foreach $activity as $activity } -->
+				<li>
+					<div>
+						<span>15</span>
+						<br>
+						<span>07月</span>
+					</div>
+					<a href="/index/activity/info.html?id={$activity.id}" title="">
+						<h2>{$activity.title}</h2>
+						<!-- <span>姚明</span> -->
+					</a>
+				</li>
+				<!-- {/foreach} -->
+		
+			</ul>
+		</div>
+	</div>
+	<div class="sub_common">
+		<div class="sub_common_title">
+			<h2>大咖驾到</h2>
+			<a href="/index/dakashuo/index.html" title="更多">更多</a>
+		</div>
+		<div class="sub_youhui_content itao">
+			<ul>
+				<li>
+					<a href="/index/dakashuo/info.html?id={$dakazhuanfang.id}" title="">
+						<img src="__IMAGE__/{$dakazhuanfang.image}" />
+						<span>大咖专访</span>
+						<h2>{$dakazhuanfang.title}</h2>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="sub_youhui_content ilist">
+			<ul>
+				<!-- {foreach $daka_arcitle as $daka_arcitle} -->
+				<li>
+					<a href="/index/dakashuo/info.html?id={$daka_arcitle.id}" title="">
+						<span>订阅</span>
+						<h2>{$daka_arcitle.title}</h2>
+					</a>
+				</li>
+				<!-- {/foreach} -->
+			</ul>
+		</div>
+	</div>
+</div>

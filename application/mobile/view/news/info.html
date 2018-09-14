@@ -1,0 +1,58 @@
+{include file="common/top"}
+<!--top end-->
+<!--内容区域 start-->
+<div class="detail_class">
+	<ul>
+		<!-- {foreach $m_new_cate as $vo} -->
+		<li {if $news.cate_id eq $vo.id}class="sel"{/if}>
+			<a href="/mobile/news/index.html?cate_id={$vo.id}" title="{$vo.name}">{$vo.name}</a>
+		</li>
+		<!-- {/foreach} -->
+	</ul>
+</div>
+<div class="detail_title">
+	<h1>{$news.title}</h1>
+	<p>
+		<span>{$cate_info.name}</span>
+		<span>{$news['author']}{$news['time']|date="Y-m-d",###}</span>
+	</p>
+</div>
+<div class="detail_text">{$news.content}</div>
+<div class="detail_label">
+	<h1>标签：</h1>
+	<p>
+		{if $tab} {foreach $tab as $tab}
+		<a>{$tab.name}</a>
+		{/foreach} {/if}
+	</p>
+</div>
+
+<!-- {if $last} -->
+<div class="detail_prev">
+	<span>上一篇：</span>
+	<a href="/mobile/news/info.html?id={$last.id}">{$last.title}</a>
+	</p>
+</div>
+<!-- {/if} -->
+<!-- {if $next} -->
+<div class="detail_prev">
+	<span>下一篇：</span>
+	<a href="/mobile/news/info.html?id={$next.id}">{$next.title}</a>
+	</p>
+</div>
+<!-- {/if} -->
+{if $recomme}
+<div class="detail_commend">
+	<h1>相关推荐：</h1>
+	{foreach $recomme as $recomm}
+	<a href="/mobile/news/info.html?id={$recomm.id}">
+		<img src="__IMAGE__/{$recomm.image}">
+		<div class="b"></div>
+		<div class="t">{$recomm.title}</div>
+	</a>
+	{/foreach}
+</div>
+{/if}
+<!--内容区域 end-->
+<!--contact us end-->
+{include file="common/foot"}

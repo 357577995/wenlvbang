@@ -1,0 +1,59 @@
+﻿{extend name="base" /} {block name="title"}资讯列表{/block} {block name="body"}
+<link rel="stylesheet" href="__ADMIN__/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+
+<section class="Hui-article-box">
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i>
+		首页
+		<span class="c-gray en">&gt;</span>
+		新闻资讯
+		<span class="c-gray en">&gt;</span>
+		资讯列表
+		<a class="btn btn-success radius r" style="line-height: 1.6em; margin-top: 3px" href="javascript:location.replace(location.href);" title="刷新">
+			<i class="Hui-iconfont">&#xe68f;</i>
+		</a>
+	</nav>
+	<div class="Hui-article">
+		<div>
+			<div class="pd-20">
+				<div class="mt-20">
+					<div class="cl pd-5 bg-1 bk-gray mt-20">
+						<span class="r">
+							共有数据：
+							<strong>{$total}</strong>
+							条
+						</span>
+					</div>
+					<br />
+					<table class="table table-border table-bordered table-bg table-hover table-sort">
+						<thead>
+							<tr class="text-c">
+								<th width="40">ID</th>
+								<th width="120">姓名</th>
+								<th width="120">电话</th>
+								<th width="120">活动名称</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach $activity as $vo}
+							<tr class="text-c va-m">
+								<td>{$vo.id}</td>
+								<td>{$vo.user_name}</td>
+								<td>{$vo.mobile}</td>
+								<td>{$vo.activity.title}</td>
+							</tr>
+							{/foreach}
+						</tbody>
+					</table>
+				</div>
+				<div class="fenye">{$page}</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__ADMIN__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+{/block}

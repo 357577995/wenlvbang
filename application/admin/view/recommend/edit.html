@@ -1,0 +1,114 @@
+{extend name="base" /} {block name="title"}修改峰会{/block} {block name="body"}
+<script type="text/javascript" charset="utf-8" src="__UEDITOR__/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__UEDITOR__/ueditor.all.min.js">
+	
+</script>
+<script type="text/javascript" charset="utf-8" src="__UEDITOR__/lang/zh-cn/zh-cn.js"></script>
+<section class="Hui-article-box">
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i>
+		首页
+		<span class="c-gray en">&gt;</span>
+		外部推荐活动
+		<span class="c-gray en">&gt;</span>
+		修改外部推荐活动
+		<a class="btn btn-success radius r" style="line-height: 1.6em; margin-top: 3px" href="javascript:location.replace(location.href);" title="刷新">
+			<i class="Hui-iconfont">&#xe68f;</i>
+		</a>
+	</nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="page-container">
+				<form action="/admin/recommend/update" method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data">
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">
+							<span class="c-red">*</span>
+							峰会标题：
+						</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" class="input-text" value="{$new.title}" id="title" name="title">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">
+							<span class="c-red">*</span>
+							活动链接地址：
+						</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" class="input-text" value="{$new.url}" id="url" name="url">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">
+							<span class="c-red">*</span>
+							峰会图片：
+						</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<img src="__IMAGE__{$new.image}" alt="" width="100">
+							<input type="file" name="image" id="image">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">
+							<span class="c-red">*</span>
+							发布时间：
+						</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<!-- <input size="16" type="text" value="{$new['time']|date=" Y-m-d",###}" name='time' class="form_datetime">-->
+							<input type="text" onfocus="WdatePicker()" class="input-text Wdate" name="time" style="width: 120px;" value="{if isset($new.time)}{:date('Y-m-d H:i:s',$new.time)}{/if}">
+						</div>
+					</div>
+					<input type="hidden" name="id" id="id" value="{$new.id}">
+					<div class="row cl">
+						<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+							<button id="submits" class="btn btn-primary radius" type="submit" onclick="return validate()">
+								<i class="Hui-iconfont">&#xe632;</i>
+								保存
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</article>
+	</div>
+</section>
+<!--请在下方写此页面业务相关的脚本-->
+
+<script type="text/javascript" src="__ADMIN__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ADMIN__/static/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript">
+	//实例化编辑器
+	//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+	var ue = UE.getEditor('editor');
+
+	//提交表单的事件监听  
+	function validate() {
+		var title = $('#title').val();
+		var url = $('#url').val();
+		if (title == '') {
+			alert('活动标题不能为空');
+			return false;
+		}
+		if (url == '') {
+			alert('活动链接不能为空');
+			return false;
+		}
+	}
+</script>
+<script type="text/javascript">
+	//日期插件
+	$(document).ready(function() {
+		$(".form_datetime").datetimepicker({
+			format: 'yyyy-mm-dd',//显示格式
+			todayHighlight: 1,//今天高亮
+			minView: "month",//设置只显示到月份
+			startView: 2,
+			forceParse: 0,
+			showMeridian: 1,
+			autoclose: 1
+		//选择后自动关闭
+		});
+	})
+</script>
+{/block}

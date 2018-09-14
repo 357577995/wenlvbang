@@ -1,0 +1,126 @@
+{extend name="base" /}
+{block name="title"}添加方案{/block}
+{block name="body"}
+<script type="text/javascript" charset="utf-8" src="__UEDITOR__/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__UEDITOR__/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__UEDITOR__/lang/zh-cn/zh-cn.js"></script>
+<section class="Hui-article-box">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+		<span class="c-gray en">&gt;</span>
+		方案列表
+		<span class="c-gray en">&gt;</span>
+		添加方案 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
+<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="page-container">
+			<form action="/service/plan/insert" method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>方案名称：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" value="" id="name" name="name">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>业态分类：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<select name="cate_id" id="cate_id" class="input-text" onchange="selected()">
+							<option value="0">--请选择--</option>
+							{foreach $cate as $vo}
+							<option value="{$vo.id}" disabled>{$vo.name}</option>
+								{foreach $vo.son as $son}
+								<option value="{$son.id}">&nbsp;&nbsp;{$son.name}</option>
+									{foreach $son.sun as $sun}
+									<option value="{$sun.id}">&nbsp;&nbsp;&nbsp;&nbsp;{$sun.name}</option>
+									{/foreach}
+								{/foreach}
+							{/foreach}
+						</select>
+					</div>
+				</div>
+				<!-- <div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>业态参数：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<span id="desc"></span>
+						
+					</div>
+				</div> -->
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>首页显示图片：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="file"  value="" id="image" name="image">
+					</div>
+				</div>
+
+				<div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>方案内容：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <script id="editor" name="content" type="text/plain" style="width:1000px;height:500px;"></script>
+                    </div>
+                </div>
+				<div class="row cl" style="margin-top:100px;">
+					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+						<button id="submits" onclick="return validate()" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		</article>
+	</div>
+</section>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+	//实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor');
+
+	
+	
+	//提交表单的事件监听  
+	function validate() {
+	    var name = $('#name').val();
+	    var cate_id = $('#cate_id').val();
+	    var html = ue.getContent();
+	   	if(name==''){
+        	alert('方案名称不能为空');
+        	return false;
+        } 
+        if(cate_id==0){
+        	alert('业态分类不能为空');
+        	return false;
+        } 
+        if(html==''){
+        	alert('方案内容不能为空');
+        	return false;
+        } 
+	}
+      
+    //分类改变-相应参数改变
+    function selected(){
+    	
+    	$('.params').remove();
+
+    	var cate_id = $('#cate_id').val();
+   /*  	$.post("/service/plan/changeparam", {cate_id: cate_id}, function(msg) {
+    		//alert(msg);
+
+
+    		var myobj=eval(msg);
+    		
+			/* for(var i=0;i<myobj.length;i++){ 
+				if(myobj[i].type==2){
+					var type = "type='number'";
+					var span = "<span class='c-red'>*该参数只能填写数字</span>";
+				}else{
+					var type = "type='text'";
+					var span = "";
+				}
+			    text = "<div class='params'>"+myobj[i].name+"：<input "+type+" class='input-text' style='width:200px' name='param["+myobj[i].id+"]' id='"+myobj[i].id+"'>"+span+"</div>";
+                $("#desc").after(text);
+			} */
+			
+       // }); */
+    }
+    
+
+</script>
+{/block}

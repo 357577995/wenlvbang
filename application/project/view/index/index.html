@@ -1,0 +1,80 @@
+{extend name="base" /}
+{block name="title"}后台首页{/block}
+{block name="body"}
+    <section class="Hui-article-box">
+  <nav class="breadcrumb"><i class="Hui-iconfont"></i> <a href="/" class="maincolor">首页</a> 
+    <span class="c-999 en">&gt;</span>
+    <span class="c-666">我的桌面</span> 
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+  <div class="Hui-article">
+    <article class="cl pd-20">
+      <p class="f-20 text-success">欢迎使用</p>
+      <table class="table table-border table-bordered table-bg">
+        <thead>
+          <tr>
+            <th colspan="7" scope="col">信息统计</th>
+          </tr>
+          <tr class="text-c">
+            <th>统计</th>
+            <th>方案数</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-c">
+            <td>总数</td>
+            <td>92</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-border table-bordered table-bg mt-20">
+        <thead>
+          <tr>
+            <th colspan="2" scope="col">服务器信息</th>
+          </tr>
+        </thead>
+            <tbody>
+              
+              <tr>
+                <td>服务器IP地址</td>
+                <td>{$_SERVER['SERVER_ADDR']}</td>
+          </tr>
+              <tr>
+                <td>服务器域名</td>
+                <td>{$_SERVER['SERVER_NAME']}</td>
+          </tr>
+              <tr>
+                <td>服务器端口 </td>
+                <td>{$_SERVER['SERVER_PORT']}</td>
+          </tr>
+              <tr>
+                <td>服务器的语言种类 </td>
+                <td>Chinese (People's Republic of China)</td>
+          </tr>
+               <tr>
+                <td>服务器软件 </td>
+                <td>{$_SERVER['SERVER_SOFTWARE']}</td>
+          </tr>
+          <tr>
+                <td>操作系统 </td>
+                <td>{$_SERVER['HTTP_USER_AGENT']}</td>
+          </tr>
+              <tr>
+                <td>服务器当前时间 </td>
+                <td>{:date('Y-m-d H:i:s',time())}</td>
+          </tr>
+              
+              
+             
+             
+              
+             
+             
+        </tbody>
+      </table>
+    </article>
+    <footer class="footer">
+      项目方-后台系统
+</footer>
+</div>
+</section>
+{/block}

@@ -1,0 +1,162 @@
+
+*{
+	margin:0;
+	padding: 0;
+}
+/*html{font-size: 16px;}*/
+#jfhd{
+	display: table;
+	background: url('/statics/images/000/hd_bg.jpg')top center no-repeat;
+	background-size:100% 100%;
+	height: 9.3125rem;
+	width: 100%;
+	text-align: center;
+}
+.jf_ct{
+	display: table-cell;
+	vertical-align: middle;
+	margin:0 auto;
+	color: #fff;
+}
+.jf_ct>p{
+	font-size: 1.375rem;
+	line-height: 2.8125rem;
+}
+.jf_tm{
+	font-size: 0.8125rem;
+	line-height: 2.25rem;
+}
+.jf_tm span{
+	font-size: 1.25rem;
+	display: inline-block;
+	background: #ffefdf;
+	color: #171717;
+	font-weight: bold;
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: 0.2rem;
+}
+.jf_ct>a{
+	display: block;
+	line-height: 1.875rem;
+	width: 7.5rem;
+	font-size: 1.125rem;
+	border-radius: 0.5rem;
+	color: #cc3234;
+	background: #fff;
+	text-decoration: none;
+	margin:0 auto;
+	margin-top: 0.875rem;
+}
+
+/*媒体查询*/
+@media screen and (min-width:320px) and (max-width:359px) {
+  html { font-size: 50%; } /*0.5*/
+  #jfhd{
+  	height: 6.984rem;
+  }
+  .jf_ct>p{
+  	font-size: 1.375rem;
+  	line-height: 2.109rem;
+  }
+  .jf_tm{
+  	font-size: 0.8125rem;
+  	line-height: 1.6875rem;
+  }
+  .jf_tm span{
+  	font-size: 1.25rem;
+  	width: 1.6875rem;
+  	height:1.6875rem;
+  	border-radius: 0.2rem;
+  }
+  .jf_ct>a{
+  	line-height: 1.406rem;
+  	width: 5.625rem;
+  	font-size: 1.125rem;
+  	border-radius: 0.5rem;
+  	margin-top: 0.65625rem;
+  }
+
+}
+@media screen and (min-width:360px) and (max-width:409px) {
+	html { font-size: 75% ; }  /*0.56*/
+	#jfhd{
+		height: 6.984rem;
+	}
+	.jf_ct>p{
+		font-size: 1.03125rem;
+		line-height: 2.109rem;
+	}
+	.jf_tm{
+		font-size: 0.61rem;
+		line-height: 1.6875rem;
+	}
+	.jf_tm span{
+		font-size: 0.9375rem;
+		width: 1.6875rem;
+		height:1.6875rem;
+		border-radius: 0.2rem;
+	}
+	.jf_ct>a{
+		line-height: 1.406rem;
+		width: 5.625rem;
+		font-size: 0.84375rem;
+		border-radius: 0.5rem;
+		margin-top: 0.65625rem;
+	}
+
+}
+@media screen and (min-width:410px) and (max-width:479px) {
+  html { font-size: 80% ; }  /*0.64*/
+  #jfhd{
+  	height: 7.403rem;
+  }
+  .jf_ct>p{
+  	font-size: 1.0931rem;
+  	line-height: 2.23554rem;
+  }
+  .jf_tm{
+  	font-size: 0.646rem;
+  	line-height: 1.78875rem;
+  }
+  .jf_tm span{
+  	font-size: 0.99375rem;
+  	width: 1.78875rem;
+  	height:1.78875rem;
+  	border-radius: 0.2rem;
+  }
+  .jf_ct>a{
+  	line-height: 1.49036rem;
+  	width: 5.9625rem;
+  	font-size: 0.894375rem;
+  	border-radius: 0.53rem;
+  	margin-top: 0.695625rem;
+  }
+}
+@media screen and (min-width:480px) and (max-width:639px) {
+  html { font-size: 135% ; }  /*0.75*/
+  #jfhd{
+  	height: 6.984rem;
+  }
+  .jf_ct>p{
+  	font-size: 0.9rem;
+  	line-height: 2.109rem;
+  }
+  .jf_tm{
+  	font-size: 0.61rem;
+  	line-height: 1.6875rem;
+  }
+  .jf_tm span{
+  	font-size: 0.9375rem;
+  	width: 1.6875rem;
+  	height:1.6875rem;
+  	border-radius: 0.2rem;
+  }
+  .jf_ct>a{
+  	line-height: 1.406rem;
+  	width: 5.625rem;
+  	font-size: 0.84375rem;
+  	border-radius: 0.5rem;
+  	margin-top: 0.65625rem;
+  }
+}

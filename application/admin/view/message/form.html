@@ -1,0 +1,163 @@
+{extend name="base" /}
+{block name="title"}添加实战营信息{/block}
+{block name="body"}
+
+<section class="Hui-article-box">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+		<span class="c-gray en">&gt;</span>
+		实战营
+		<span class="c-gray en">&gt;</span>
+		文旅活动 
+		<span class="c-gray en">&gt;</span>
+		添加表单信息 
+		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
+<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="page-container">
+			<form action="/admin/message/form_update" method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data">
+			{if condition="$do eq 1"}
+				<div class="row cl" >
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>表单内容：</label>
+					<!-- 报名表单 -->
+					<div class="formControls col-xs-8 col-sm-9">
+						{foreach $question as $k=>$vo}
+						<div class='formControls col-xs-8 col-sm-9'>
+							<div class='add-article-box'>
+								<div class='add-article-box-content'>
+									{$k+1}:{$vo.name}
+								</div>
+								<div>
+									{if condition="$vo.type eq 0"}
+										{foreach $vo.option as $value}
+										<input id="radio_type" type="radio">{$value.name}
+										{/foreach}
+									{elseif condition="$vo.type eq 1" /}
+										{foreach $vo.option as $value}
+										<input id="checkbox_type"  type="checkbox">{$value.name}
+										{/foreach}
+									{elseif condition="$vo.type eq 2" /}
+										<input type='text' class='input-text mt-10' style='width:200px' autocomplete='off'>
+									{/if}
+								</div>
+							</div>
+						</div>
+						{/foreach}	
+					</div>			
+				</div>
+			{/if}
+				<div class="row cl" >
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>更新报名表单：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <div class="add-article-box" id="desc">
+                          <h2 class="add-article-box-title"><span>表单类型</span>
+                            <span style="color:green;font-size:14px;margin-left:10px;">*固定表单中已包含手机号和姓名</span>
+                            <span style="color:red;font-size:14px;margin-left:10px;">*更新后的表单会覆盖原表单</span>
+                          </h2>
+                          <div class="add-article-box-content text-center">          
+                                <label>
+                                  <button type="button" class="btn btn-primary my-btn" alt="radio">单选题</button>
+                                </label>
+                                <label>
+                                  <button type="button" class="btn btn-primary my-btn" alt="checkbox">多选题</button>
+                                </label>
+                                <label>
+                                  <button type="button" class="btn btn-primary my-btn" alt="text">文本题</button>
+                                </label>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="id" id="id" value="{$id}">
+                <div class="row cl" >
+					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+						<button id="submits" class="btn btn-primary radius" type="submit" onclick="return validate()"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		</article>
+	</div>
+</section>
+<script type="text/javascript" src="__INDEX__/introduction/jquery.min.js"></script>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+	//报名表单
+    $(document).ready(function(){
+        // 计数器，用来计算产生多少个题目
+        var ag = 0;
+        $(".my-btn").click(function(){
+            ag++;
+            // 获取buttn按钮的
+            str =  $(this).attr('alt');
+            //alert(str);
+            switch(str)
+            {
+              case 'radio':
+                text = ahtml(ag,'单选题','0');
+                $("#desc").after(text);
+                break;
+              case 'checkbox':
+                text = ahtml(ag,'多选题','1');
+                $("#desc").after(text);
+                break;
+              default:
+                text = "<div class='formControls col-xs-8 col-sm-9'><div class='add-article-box'><h2 class='add-article-box-title'><span>Q-"+ag+"：文本题 </span><span id='question"+ag+"'>  <input type='hidden' name='question["+ag+"][type]' value='2'/ ></span><button type='button' class='close question-close' id='remove"+ag+"' aria-label='Close'><span aria-hidden='true'>&times;</span></button></h2><div class='add-article-box-content'><input type='text' class='input-text' placeholder='请输入问卷名称' name='question["+ag+"][name]' autocomplete='off' ></div></div></div>";
+                $("#desc").after(text);
+
+            }
+            qclose();
+            oclose();
+            oadd(ag);
+            // 清理除本选项外的所有删除按钮
+            for (var i = 1; i < ag; i++) {
+              $("#remove"+i).remove();
+            }
+        });
+
+        // 删除问题（递归）
+        function qclose(){
+           $('.question-close').click(function(){
+              // 计数器减一
+              ag--;       
+              // 删除本问题
+              $(this).parents('.add-article-box').remove();
+              // 在下个问题添加
+              if(ag!=0){
+                button = "<button type='button' class='close question-close' id='remove"+ag+"' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+                $("#question"+ag).after(button);
+                qclose();
+              }
+            })
+        }
+        // 删除属于自己的答案
+        function oclose(){
+            $('.option-close').click(function(){
+              // 删除前面的选项
+              $(this).prev().remove();
+              // 删除按钮
+              $(this).remove();
+          })
+        }
+        // 添加答案
+        function oadd(ag){
+            $('.option-add').click(function(){
+             var add =  "<input type='text' class='input-text' style='width:200px' placeholder='请输入题目答案'' name='question["+ag+"][option][]' autocomplete='off'><button type='button' class='option-close'><span>&times;</span></button>";
+              $(this).parent().next().append(add);
+              // 执行一次
+              oclose();
+          })
+        }
+        // 添加html代码
+        function ahtml(ag,type,t){
+          return  "<div class='formControls col-xs-8 col-sm-9' ><h2 class='add-article-box-title'><span>Q-"+ag+"："+type+"</span><span>  <input type='hidden' name='question["+ag+"][type]' value='"+t+"'/></span> <button type='button' class='btn btn-primary option-add' id='question"+ag+"'>添加答案</button> <button type='button' class='close question-close' id='remove"+ag+"'><span>&times;</span></button></h2><div class='add-article-box-content'><input type='text' class='input-text' style='width:100%' placeholder='请输入题目名称' name='question["+ag+"][name]' autocomplete='off' ><input type='text' class='input-text' style='width:200px' placeholder='请输入选项' name='question["+ag+"][option][]' autocomplete='off' ><button type='button' class='option-close'><span>&times;</span></button></div></div>";
+
+        }  
+
+        })
+
+    //提交表单的事件监听  
+	function validate() {
+	    
+	}
+</script>
+{/block}

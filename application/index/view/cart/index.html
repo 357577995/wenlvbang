@@ -1,0 +1,59 @@
+{extend name="base" /}
+{block name="title"}方案库{/block}
+{block name="body"}
+	
+	
+
+	<h3 style="text-align:center">方案库</h3>
+
+	<div style="border:1px solid #ccc;width:60%;margin-left:auto;margin-right:auto;">
+		<form action="/index/order/update" method="post">
+			<table>
+				<tr>
+					<th width="50"><input type="checkbox" id="allbox"></th>
+					<th width="200">方案名称</th>
+					<th width="250">图片</th>
+					<th width="200">操作</th>
+				</tr>
+				{if condition="$type eq 1"}
+					{foreach $cart as $k=>$vo}
+					<tr >
+						<td><input type="checkbox" class="danbox" name="cart_id[]" value="{$vo.id}"></td>
+						<td>{$vo.plan_name}</td>
+						<td><img src="__IMAGE__{$vo.image}" alt="" width="100"></td>
+						<td>
+							<a href="/index/cart/del?id={$vo.id}">删除</a>
+						</td>
+					</tr>
+					{/foreach}
+				{else /}
+					<tr>
+						<td colspan="4" style="font-size:18px;line-height:50px;text-align:center;">购物车为空，点我去<a href="/index/index/index">挑选方案</a>吧</td>
+					</tr>
+				{/if}
+			</table>
+		
+			<a href="/index/index/index">继续选择方案</a>
+			<input type="submit" value="生成订单" style="float:right" onclick="return btn()">
+		</form>
+	</div>
+<script type="text/javascript" src="__INDEX__/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	//全选按钮
+	$('#allbox').on('change',function(){
+	    if ($(this).is(':checked')) {
+	        $('.danbox').prop('checked','checked');
+	    }else{
+	        $('.danbox').removeProp('checked');
+	    }
+	})
+	//提交前判定
+	function btn(){
+		var danbox = $(".danbox").is(':checked');
+		if( danbox == false){
+			alert('请先选择方案');
+			return false;
+		}
+	}
+</script>
+{/block}

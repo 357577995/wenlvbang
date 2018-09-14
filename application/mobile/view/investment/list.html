@@ -1,0 +1,73 @@
+{include file="common/top"}
+<!--内容区域 start-->
+<div class="detail_class">
+	<ul>
+		<!-- {foreach $m_investment_cate as $dakashuo_cate} -->
+		<li {if $cate_id eq $dakashuo_cate.id}class="sel"{/if}>
+			<a href="/mobile/investment/index.html?cate_id={$dakashuo_cate.id}" title="{$dakashuo_cate.name}">{$dakashuo_cate.name}</a>
+		</li>
+		<!-- {/foreach} -->
+	</ul>
+</div>
+<div class="detail_list_bg">
+	<div class="detail_list rzlist">
+		<ul class='newslist'>
+			<!-- {foreach $investment as $investment} -->
+			<li>
+				<a href="javascript:void(0);">
+					<h2>
+						<b>{$investment.name}</b>
+					</h2>
+					<p>
+						<span> {$investment.fu_title} </span>
+					</p>
+					<p>
+						<b>项目介绍：</b>
+						{$investment.content}
+					</p>
+					<p class="lr">
+						<b>{$investment['time']|date="Y-m-d",###}</b>
+					</p>
+				</a>
+			</li>
+			<!-- {/foreach} -->
+		</ul>
+		<input type="hidden" value="{$limit}" id='limit' />
+		<input type="hidden" value="{$cate_id}" id='cate_id' />
+	</div>
+</div>
+<script type="text/javascript">
+	$(window).scroll(function() {
+		//已经滚动到上面的页面高度
+		var scrollTop = $(this).scrollTop();
+		//页面高度
+		var scrollHeight = $(document).height();
+		//浏览器窗口高度
+		var windowHeight = $(this).height();
+		//此处是滚动条到底部时候触发的事件，在这里写要加载的数据，或者是拉动滚动条的操作
+		if (scrollTop + windowHeight == scrollHeight) {
+			var limit = $("#limit").val();
+			var cate_id = $("#cate_id").val();
+
+			$.ajax({
+				type: 'GET',
+				url: '/mobile/investment/more',
+				data: {
+					limit: limit,
+					cate_id: cate_id
+				},
+				success: function(result) {
+					if (result.code == 1) {
+						limit++;
+						$("#limit").val(limit);
+						$(".newslist").append(result.data);
+					} else {
+					}
+				},
+				dataType: 'json'
+			});
+		}
+	});
+</script>
+<!--内容区域 end-->
+{include file="common/foot"}

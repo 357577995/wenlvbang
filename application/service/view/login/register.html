@@ -1,0 +1,236 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" href="__IMAGE__{$config.icon}" type="image/x-icon" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link href="__ADMIN__/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="__ADMIN__/static/h-ui/css/H-ui.login.css" rel="stylesheet" type="text/css" />
+<link href="__ADMIN__/static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__ADMIN__/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__ADMIN__/region.js"></script>
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script><![endif]-->
+<title>服务商注册</title>
+</head>
+<body>
+<div class="header" style="margin-top:30px;text-align:center;">
+    <h1>服务商注册</h1>
+</div>
+<div class="loginWraper">
+	<div id="loginform" class="loginBox">
+		<form class="form form-horizontal" action="/service/login/register_do" method="post" enctype="multipart/form-data">
+			<div class="row cl">
+				<label class="form-label col-xs-4">用户名</label>
+				<div class="formControls col-xs-5">
+					<input id="username" name="username" type="text" placeholder="用户名" class="input-text size-L">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4">邮箱</label>
+				<div class="formControls col-xs-5">
+					<input id="email" name="email" type="email" placeholder="邮箱" class="input-text size-L">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4">密码</label>
+				<div class="formControls col-xs-5">
+					<input id="password" name="password" type="password" placeholder="密码" class="input-text size-L">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4">确认密码</label>
+				<div class="formControls col-xs-5">
+					<input id="repassword" name="repassword" type="password" placeholder="确认密码" class="input-text size-L">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4">公司名称</label>
+				<div class="formControls col-xs-5">
+					<input id="company_name" name="company_name" type="text" placeholder="公司名" class="input-text size-L">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4">联系人</label>
+				<div class="formControls col-xs-5">
+					<input id="contact" name="contact" type="text" placeholder="联系人" class="input-text size-L">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4">手机号</label>
+				<div class="formControls col-xs-5">
+					<input id="mobile" name="mobile" type="text" placeholder="电话" class="input-text size-L">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4">营业执照</label>
+				<div class="formControls col-xs-5">
+					<input type="file" name="licence" id="licence" >
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4">所在城市</label>
+				<div class="formControls col-xs-5">
+				   <select  id="select-1" name="country" onchange="selectArea(1)">
+				       <option value="0">国家</option>
+				       {volist name="area1" id="vo"}
+				           <option value="{$vo.region_id}">{$vo.region_name}</option>
+				       {/volist}
+				   </select>
+				    <select class="form-control" name="province" id="select-2" onchange="selectArea(2)">
+				       <option value='0'>省直辖市</option>
+				    </select>
+				    <select class="form-control" name="city" id="select-3" onchange="selectArea(3)">
+				       <option value='0'>市</option>
+				    </select>
+				    <select class="form-control" name="district" id="select-4" onchange="selectArea(4)">
+				       <option value='0'>县区</option>
+				    </select>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4">详细地址</label>
+				<div class="formControls col-xs-5">
+					<input type="text" class="input-text" value="" id="address" name="address">
+				</div>
+			</div>
+			<div class="row cl">
+				<div class="formControls col-xs-6 col-xs-offset-5">
+					<input name="" type="submit" class="btn btn-success radius size-L" onclick="return validate()" value="&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;册&nbsp;">
+					<a href="/service/login/index" class="btn btn-default radius size-L">已有账号，去登录</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="footer" style="margin-top:20px;">文旅帮</div>
+<script type="text/javascript" src="__ADMIN__/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ADMIN__/static/h-ui/js/H-ui.js"></script>
+<script>
+	//提交表单的事件监听  
+	function validate() {
+	    var username = $('#username').val();
+	    var email = $('#email').val();
+		var password = $('#password').val();
+		var repassword = $('#repassword').val();
+		var company_name = $('#company_name').val();
+		var contact = $('#contact').val();
+		var mobile = $('#mobile').val();
+		var address = $('#address').val();
+		var country = $('#select-1').val();
+		var province = $('#select-2').val();
+		var city = $('#select-3').val();
+		var district = $('#select-4').val();
+	    if(username==''){
+        	alert('用户名不能为空');
+        	return false;
+        }
+        if(email==''){
+        	alert('邮箱不能为空');
+        	return false;
+        } 
+        if(password==''){
+        	alert('密码不能为空');
+        	return false;
+        } 
+        if(repassword==''){
+        	alert('确认密码不能为空');
+        	return false;
+        } 
+        if(password != repassword){
+        	alert('两次密码输入不一致');
+        	return false;
+        } 
+        if(company_name==''){
+        	alert('公司名称不能为空');
+        	return false;
+        } 
+        if(contact==''){
+        	alert('联系人不能为空');
+        	return false;
+        } 
+        if(mobile==''){
+        	alert('手机号不能为空');
+        	return false;
+        }
+        if(mobile.match(/^1(3|4|5|7|8)\d{9}$/)==null){
+			alert('手机号格式不正确');
+			return false;
+		}
+        if(address==''){
+        	alert('详细地址不能为空');
+        	return false;
+        } 
+        if(country=='0'){
+        	alert('国家不能为空');
+        	return false;
+        } 
+        if(province=='0'){
+        	alert('省直辖市不能为空');
+        	return false;
+        } 
+        if(city=='0'){
+        	alert('市不能为空');
+        	return false;
+        } 
+        if(district=='0'){
+        	alert('县区不能为空');
+        	return false;
+        } 
+	}
+
+//地址的选择
+	var region_id = 0;
+	function selectArea(type){
+	    region_id = $("#select-"+type+" option:selected").val();
+	    if(region_id == 0){
+	        if(type == 1){
+	            $("#select-2").html("<option value='0'>省直辖市</option>");
+	            $("#select-3").html("<option value='0'>市</option>");
+	            $("#select-4").html("<option value='0'>县区</option>");
+	            region_id = 0;
+	        }
+	        if(type == 2){
+	            $("#select-3").html("<option value='0'>市</option>");
+	            $("#select-4").html("<option value='0'>县区</option>");
+	            region_id = $("#select-1").val();
+	        }
+	        if(type == 3){
+	        	$("#select-4").html("<option value='0'>县区</option>");
+	            region_id = $("#select-2").val();
+	        }
+	        if(type == 4){
+	            region_id = $("#select-3").val();
+	        }
+	        return;
+	    }
+	    $.ajax({
+	        type:'POST',
+	        dataType:'json',
+	        data:{'region_id':region_id,'type':type},
+	        url:'/service/login/changeArea3',
+	        success:function(data){
+                if(type == 1){
+                    $("#select-2").html(data);
+                    $("#select-3").html("<option value='0'>市</option>");
+                }
+                if(type == 2){
+                    $("#select-3").html(data);
+                }
+	            if(type == 3){
+                    $("#select-4").html(data);
+                }
+	        }
+	    })
+	}
+</script>
+</body>
+</html>

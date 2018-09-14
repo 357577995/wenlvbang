@@ -1,0 +1,42 @@
+{include file="common/top"}
+<!--center-->
+<div class="main_c">
+	<div class="main" id="content">
+
+		<!-- 内容部分 -->
+		<div class="content wlyj">
+			<ul class="newslist">
+				<!-- {foreach $message as $message} -->
+				<li>
+					<div>
+						<a title="" href="/index/message/researchinfo.html?id={$message.id}">
+							<img src="__IMAGE__/{$message.image}" alt="" height="195" width="135">
+						</a>
+					</div>
+					<div>
+						<a title="" href="/index/message/researchinfo.html?id={$message.id}">{$message.title}</a>
+						<p>{$message.content}</p>
+					</div>
+					<div>
+						<p>
+							<a href="/index/message/researchinfo.html?id={$message.id}">查看详情</a>
+						</p>
+					</div>
+				</li>
+				<!-- {/foreach} -->
+			</ul>
+			<div class="c"></div>
+			<div class="paging">
+				<a class="next" href="/index/message/research.html?more=1">查看更多</a>
+			</div>
+		</div>
+		<!-- 内容部分 end-->
+
+	</div>
+</div>
+<!--center end-->
+
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

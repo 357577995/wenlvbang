@@ -1,0 +1,26 @@
+/* 代码整理：大头网 www.datouwang.com */
+.Z_con{margin-top: 3.3rem;}
+.F_wd_top_con2{width:100%; min-height:4em; background:#fff; border-top:0.1em solid #ccc;}
+.F_wd_top_con2_l{width:50%; background:#FFF; float:left; overflow: scroll;}
+.F_wd_top_con2_l ul li{ line-height:3.2em; text-indent:1em; border-bottom:0.1em solid #ededed;background: url(../images/fenlei_ico.png) 90% center no-repeat #FFF;background-size: 4%;}
+.F_wd_top_con2_r{width:50%;  float:right;background: #ededed; overflow: scroll;}
+.F_wd_top_con2_r ul li{ line-height:3.2em; text-indent:1em;}
+
+.F_wd_top_con2_r_borb1{ border-bottom:none;}
+.F_wd_top_con2_r_borb2{ border-bottom:none; color:#2b57ae;}
+
+
+.F_wd_top_con2_l_1{ width:40%; float:left;}
+.F_wd_top_con2_l_1 ul li{ line-height:3.2em; text-indent:1em; }
+.F_wd_top_con2_r_1{ width:55%;  float:right;}
+.F_wd_top_con2_r_1 ul li{ line-height:3.2em; text-indent:1em;}
+
+.F_wd_top_con2_l_2{width:40%; background:#ededed; float:left;}
+.F_wd_top_con2_l_2 ul li{ line-height:3.2em; text-indent:1em; border-bottom:0.1em solid #ededed;}
+.F_wd_top_con2_r_2{width:55%;  float:right;}
+.F_wd_top_con2_r_2 ul li{ line-height:3.2em; text-indent:1em;}
+
+
+.F_wd_top_con2_l ul li.current{background: url(../images/fenlei_ico.png) 90% center no-repeat #ededed;background-size: 4%; color:#f7921e;}
+.F_wd_top_con2_l ul li.current{}
+.by{display: none;}

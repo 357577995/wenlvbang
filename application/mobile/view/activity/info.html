@@ -1,0 +1,86 @@
+{include file="common/top"}
+<!--top end-->
+<!--内容区域 start-->
+<div class="detail_class">
+	<ul>
+	<!-- {foreach $m_activity_cate as $vo} -->
+		<li {if $project.cate_id eq $vo.id}class="sel"{/if}>
+			<a href="/mobile/activity/index.html?cate_id={$vo.id}" title="{$vo.name}">{$vo.name}</a>
+		</li>
+		<!-- {/foreach} -->
+	</ul>
+</div>
+<div class="detail_title">
+	<h1>{$project.title}</h1>
+	<p><span>{$cate_info.name}</span><span>{$project['time']|date="Y-m-d",###}</span></p>
+</div>
+<div class="detail_text">
+{$project.content}
+</div>
+{if $tab}
+<div class="detail_label">
+	<h1>标签：</h1>
+	<p>
+	{foreach $tab as $tab}<a>{$tab.name}</a>{/foreach}</p>
+</div>
+{/if}
+<!-- {if $last} -->
+<div class="detail_prev">
+	<span>上一篇：</span><a href="/mobile/activity/info.html?id={$last.id}">{$last.title}</a></p>
+</div>
+<!-- {/if} -->
+<!-- {if $next} -->
+<div class="detail_prev">
+	<span>下一篇：</span><a href="/mobile/activity/info.html?id={$next.id}">{$next.title}</a></p>
+</div>
+<!-- {/if} -->
+{if $recomme}
+<div class="detail_commend">
+	<h1>相关推荐：</h1>
+	{foreach $recomme as $recomm}
+	<a href="/mobile/activity/info.html?id={$recomm.id}"><img src="__IMAGE__/mobile//banner.png"><div class="b"></div><div class="t">{$recomm.title}</div></a>
+	{/foreach}
+</div>
+{/if}
+<div class="detail_baoming">
+	<div class="cd-popup-trigger"><img src="__IMAGE__/mobile//baoming.png"></div>
+</div>
+
+<link rel="stylesheet" href="__INDEX__/css/tanchuceng.css"> <!-- Resource style -->
+<div class="cd-popup" role="alert">
+	<div class="cd-popup-container">
+	
+		<a href="#" class="cd-popup-close img-replace">关闭</a>
+	
+	<div class="uc_form">
+		<form action="/mobile/activity/sub" method="POST" onsubmit='return validate(this)'>
+		<ul>
+			<li><span>姓名：</span><input value="" name='user_name'></li>
+			<li><span>电话：</span><input value="" name='mobile'></li>
+			<input type='hidden' name='activity_id' value={$project.id}>
+			<li class="sub"><input type="submit" name="" value="提交"></li>
+		</ul>
+		</form>
+	</div>
+		
+	</div> <!-- cd-popup-container -->
+</div>
+<script type="text/javascript">
+		function validate(form) {
+			var mobile = form.mobile.value;
+			if (isNaN(mobile)) {
+				alert('请输入正确的电话号码！');
+				form.mobile.focus();
+				return false;
+			}
+			var reg = /^1[345678][0-9]{9}$/;
+			if (!reg.test(mobile)) {
+				alert('请输入正确的电话号码！');
+				form.mobile.focus();
+				return false;
+			}
+			return true;
+		}
+	</script>
+<script src="__INDEX__/js/tanchuceng.js"></script> 
+{include file="common/foot"}

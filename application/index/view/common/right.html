@@ -1,0 +1,80 @@
+
+<div class="sp_right" id="contentRight">
+
+	<div class="sub_common">
+		<div class="sub_common_title">
+			<h2>文旅培训</h2>
+			<a href="/index/activity/index.html" title="更多">更多</a>
+		</div>
+		<div class="sub_youhui_content itao">
+			<ul>
+				<li>
+					<a href="/index/activity/info.html?id={$activityc.id}" title="">
+						<img src="__IMAGE__/{$activityc.image}" />
+						<span>{$activityc.name}</span>
+						<h2>{$activityc.title}</h2>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="sub_youhui_content ilist">
+			<ul>
+				<!-- {foreach $activity_arcitle as $key=>$activity_arcitle } -->
+				{if $key lt 2}
+				<li>
+					<a href="/index/activity/info.html?id={$activity_arcitle.id}" title="">
+						<span>报名中</span>
+						<h2>{$activity_arcitle.title}</h2>
+					</a>
+				</li>
+				{/if}
+				<!-- {/foreach} -->
+			</ul>
+		</div>
+		<div class="sub_youhui_content itao">
+			<ul>
+			<!-- {foreach $nactivity_arcitle as $key=>$activity_arcitle } -->
+			{if $key eq 3 }
+				<li>
+					<a href="/index/activity/info.html?id={$activity_arcitle.id}" title="">
+						<img src="__IMAGE__/{$activity_arcitle.image}" />
+						<h2>{$activity_arcitle.title}</h2>
+					</a>
+				</li>
+			{/if}
+			<!-- {/foreach} -->
+			</ul>
+		</div>
+		
+		
+	</div>
+	<div class="sub_common">
+		<div class="sub_common_title">
+			<h2>大咖驾到</h2>
+			<a href="/index/dakashuo/index.html" title="更多">更多</a>
+		</div>
+		<div class="sub_youhui_content itao">
+			<ul>
+				<li>
+					<a href="/index/dakashuo/info.html?id={$dakazhuanfang.id}" title="">
+						<img src="__IMAGE__/{$dakazhuanfang.image}" />
+						<span>{$dakazhuanfang.name}</span>
+						<h2>{$dakazhuanfang.title}</h2>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="sub_youhui_content ilist">
+			<ul>
+				<!-- {foreach $daka_arcitle as $daka_arcitle} -->
+				<li>
+					<a href="/index/dakashuo/info.html?id={$daka_arcitle.id}" title="">
+						<span>订阅</span>
+						<h2>{$daka_arcitle.title}</h2>
+					</a>
+				</li>
+				<!-- {/foreach} -->
+			</ul>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,65 @@
+{include file="common/top"}
+<!--内容区域 start-->
+<div class="detail_class">
+	<ul>
+		<!-- {foreach $m_activity_cate as $vo} -->
+		<li {if $cate_id eq $vo.id}class="sel"{/if}>
+			<a href="/mobile/activity/index.html?cate_id={$vo.id}" title="{$vo.name}">{$vo.name}</a>
+		</li>
+		<!-- {/foreach} -->
+	</ul>
+</div>
+<div class="detail_list_bg">
+	<div class="detail_list">
+		<ul class='newslist'>
+			<!-- {foreach $m_activity as $vo} -->
+			<li>
+				<a href='/mobile/activity/info.html?id={$vo.id}' title=''>
+					<img src="__IMAGE__/{$vo.image}">
+					<div>
+						<span>{$vo.status_message}</span>
+					</div>
+					<p>{$vo.title}</p>
+				</a>
+			</li>
+			<!-- {/foreach} -->
+		</ul>
+		<input type="hidden" value="{$limit}" id='limit' />
+		<input type="hidden" value="{$cate_id}" id='cate_id' />
+	</div>
+</div>
+<script type="text/javascript">
+	$(window).scroll(function() {
+		//已经滚动到上面的页面高度
+		var scrollTop = $(this).scrollTop();
+		//页面高度
+		var scrollHeight = $(document).height();
+		//浏览器窗口高度
+		var windowHeight = $(this).height();
+		//此处是滚动条到底部时候触发的事件，在这里写要加载的数据，或者是拉动滚动条的操作
+		if (scrollTop + windowHeight == scrollHeight) {
+			var limit = $("#limit").val();
+			var cate_id = $("#cate_id").val();
+			
+			$.ajax({
+				type: 'GET',
+				url: '/mobile/activity/more',
+				data: {
+					limit: limit,
+					cate_id: cate_id
+				},
+				success: function(result) {
+					if (result.code == 1) {
+						limit++;
+						$("#limit").val(limit);
+						$(".newslist").append(result.data);
+					} else {
+					}
+				},
+				dataType: 'json'
+			});
+		}
+	});
+</script>
+<!--内容区域 end-->
+{include file="common/foot"}

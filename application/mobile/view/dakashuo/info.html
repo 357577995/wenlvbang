@@ -1,0 +1,58 @@
+{include file="common/top"}
+<!--内容区域 start-->
+<div class="detail_class">
+	<ul>
+		<!-- {foreach $m_dakashuo_cate as $dakashuo_cate} -->
+		<li {if $dakashuo.cate_id eq $dakashuo_cate.id}class="sel"{/if>
+			<a href="/mobile/dakashuo/index.html?cate_id={$dakashuo_cate.id}" title="{$dakashuo_cate.name}">{$dakashuo_cate.name}</a>
+		</li>
+		<!-- {/foreach} -->
+	</ul>
+</div>
+<div class="detail_title">
+	<h1>{$dakashuo.title}</h1>
+	<p>
+		<span>{$cate_info.name}</span>
+		<span>{$dakashuo['time']|date="Y-m-d",###}</span>
+	</p>
+</div>
+<div class="detail_text">{$dakashuo.content}</div>
+<div class="detail_label">
+	{if $tab}
+	<h1>标签：</h1>
+	<p>
+		{foreach $tab as $tab}
+		<a>{$tab.name}</a>
+		{/foreach}
+	</p>
+	{/if}
+</div>
+<!-- {if $last} -->
+<div class="detail_prev" style="clear:both"  >
+	<span>上一篇：</span>
+	<a href="/mobile/dakashuo/info.html?id={$last.id}">{$last.title}</a>
+	</p>
+</div>
+<!-- {/if} -->
+<!-- {if $next} -->
+<div class="detail_prev" style="clear:both"  >
+	<span>下一篇：</span>
+	<a href="/mobile/dakashuo/info.html?id={$next.id}">{$next.title}</a>
+	</p>
+</div>
+<!-- {/if} -->
+<!-- {if $recomme} -->
+<div class="detail_commend">
+	<h1>相关推荐：</h1>
+	<!-- {foreach $recomme as $recomm} -->
+	<a href="/mobile/news/info.html?id={$recomm.id}">
+		<img src="__IMAGE__/{$recomm.image}">
+		<div class="b"></div>
+		<div class="t">{$recomm.title}</div>
+	</a>
+	<!-- {/foreach} -->
+</div>
+<!-- {/if} -->
+<!--内容区域 end-->
+<!--contact us end-->
+{include file="common/foot"}

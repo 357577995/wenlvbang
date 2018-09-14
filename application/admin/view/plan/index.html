@@ -1,0 +1,94 @@
+﻿{extend name="base" /}
+{block name="title"}方案列表{/block}
+{block name="body"}
+<link rel="stylesheet" href="__ADMIN__/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 方案列表管理 <span class="c-gray en">&gt;</span> 方案列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<div>
+			<div class="pd-20">
+				<div class="mt-20">
+					<form action="/admin/plan/index" method="get" accept-charset="utf-8">
+						<div class="text-c"> 
+							<input type="text" class="input-text" style="width:250px" placeholder="方案名称" id="name" name="name" value="{if isset($_GET['name'])}{$_GET['name']}{/if}">
+							<select class="input-text" style="width:250px" name="cate_id">
+								<option value="">--搜分类--</option>
+								{foreach $cate as $k => $vo}
+								<option value="{$vo.id}" {if isset($_GET['cate_id'])}{if condition="$_GET['cate_id'] eq $vo.id" }selected{/if}{/if} disabled="">{$vo.name}</option>
+									{foreach $vo.son as $son}
+									<option value="{$son.id}" {if isset($_GET['cate_id'])}{if condition="$_GET['cate_id'] eq $son.id" }selected{/if}{/if} >&nbsp;&nbsp;{$son.name}</option>
+									
+										{foreach $son.sun as $sun}
+										<option value="{$sun.id}" {if isset($_GET['cate_id'])}{if condition="$_GET['cate_id'] eq $sun.id" }selected{/if}{/if} >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$sun.name}</option>
+										{/foreach}
+									{/foreach}
+								{/foreach}
+							</select>
+							<select class="input-text" style="width:250px" name="status">
+								<option value="">--搜状态--</option>
+								<option value="2" {if isset($_GET['status'])}{if condition="$_GET['status'] eq 2" }selected{/if}{/if} >已通过</option>
+								<option value="1" {if isset($_GET['status'])}{if condition="$_GET['status'] eq 1" }selected{/if}{/if} >审核中</option>
+								<option value="3" {if isset($_GET['status'])}{if condition="$_GET['status'] eq 3" }selected{/if}{/if} >已拒绝</option>
+							</select>
+							<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+						</div>
+					</form>
+					<div class="cl pd-5 bg-1 bk-gray mt-20">
+						<span class="r">共有数据：<strong>{$total}</strong> 条</span>
+					</div><br/>
+					<table class="table table-border table-bordered table-bg table-hover table-sort">
+						<thead>
+							<tr class="text-c">
+								<th width="40">ID</th>
+								<th width="120">方案名称</th>
+								<th width="120">类别</th>
+								<th>参数</th>
+								<th >收藏数</th>
+								<th >纳入订单数</th>
+								<th width="120">状态</th>
+								<th width="130">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						{foreach $plan as $vo}
+							<tr class="text-c va-m">
+								<td>{$vo.id}</td>
+								<td>{$vo.name}</td>
+								<td>{$vo.cate1}->{$vo.cate2}</td>
+								<td>
+									{foreach $vo.param as $param}
+										{$param.name}:{$param.value}&nbsp;;&nbsp;
+									{/foreach}
+								</td>
+								<td>{$vo.collect_num}</td>
+								<td>{$vo.order_num}</td>
+								
+								<td>
+									{if condition="$vo.status eq 1"}
+										审核中
+									{elseif condition="$vo.status eq 2" /}
+										<span style="color:green">已通过</span>
+									{elseif condition="$vo.status eq 3" /}
+										<span style="color:red">已拒绝</span>
+									{/if}
+								</td>
+								<td class="td-manage">
+									<a style="text-decoration:none"  class="btn btn-danger radius" href="/admin/plan/detail?id={$vo.id}" title="编辑">查看</a>
+									<a style="text-decoration:none" class="btn btn-primary radius" href="/admin/plan/del?id={$vo.id}" title="编辑" onclick="javascript:return confirm('确认删除吗？')" >删除</a>
+								</td>
+							</tr>
+						{/foreach}
+						</tbody>
+					</table>
+				</div>
+				<div class="fenye">{$page}</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__ADMIN__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+{/block}

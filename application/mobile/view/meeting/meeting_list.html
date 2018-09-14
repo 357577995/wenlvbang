@@ -1,0 +1,73 @@
+{include file="common/top"}
+
+<!--center-->
+<div class="main_c">
+	<div class="main" id="content">
+		<!-- 内容部分 -->
+		<div class="pro_list wlhd">
+			<ul class='newslist'>
+				<!-- {foreach $message as $message} -->
+				<li>
+					<div class="pro_pic">
+						<a href="/index/meeting/info.html?id={$message.id}" title="">
+							<img src="__IMAGE__/{$message.image}" alt="">
+						</a>
+						<span>2018.夏</span>
+					</div>
+					<div class="pro_c">
+						<a href="/index/meeting/info.html?id={$message.id}" title="">
+							<h2>{$message.title}</h2>
+							<span {if $message.status==2}class='js'{/if}>{$message.status_message}</span>
+						</a>
+						<div>{$message.content}</div>
+					</div>
+					<div class="pro_ico">
+						<a href="/index/meeting/info.html?id={$message.id}">更多&gt;&gt;</a>
+					</div>
+				</li>
+				<!-- {/foreach} -->
+			</ul>
+			<input type="hidden" value="{$limit}" id='limit' />
+			<input type="hidden" value="{$cate_id}" id='cate_id' />
+		</div>
+		<!-- 内容部分 end-->
+	</div>
+</div>
+<!--center end-->
+<script type="text/javascript">
+	$(window).scroll(function() {
+		//已经滚动到上面的页面高度
+		var scrollTop = $(this).scrollTop();
+		//页面高度
+		var scrollHeight = $(document).height();
+		//浏览器窗口高度
+		var windowHeight = $(this).height();
+		//此处是滚动条到底部时候触发的事件，在这里写要加载的数据，或者是拉动滚动条的操作
+		if (scrollTop + windowHeight == scrollHeight) {
+			var limit = $("#limit").val();
+			var cate_id = $("#cate_id").val();
+			
+			$.ajax({
+				type: 'GET',
+				url: '/mobile/meeting/more',
+				data: {
+					limit: limit,
+					cate_id: cate_id
+				},
+				success: function(result) {
+					if (result.code == 1) {
+						limit++;
+						$("#limit").val(limit);
+						$(".newslist").append(result.data);
+					} else {
+					}
+				},
+				dataType: 'json'
+			});
+		}
+	});
+</script>
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

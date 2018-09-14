@@ -1,0 +1,45 @@
+{include file="common/top"}
+<!--center-->
+<div class="main_c">
+	<div class="main" id="content">
+		<!-- 内容部分 -->
+		<div class="pro_list bkj">
+			<ul>
+				<!-- {foreach $project as $project} -->
+				<li>
+					<div class="pro_pic">
+						<a href="" title="">
+							<img src="__IMAGE__/index/bangkongjian1.png" alt="">
+						</a>
+					</div>
+					<div class="pro_c">
+						<a href="/index/project/info.html?id={$project.id}" title="">
+							<h2>{$project.title}</h2>
+							<span>{$project['time']|date="Y-m-d",###}</span>
+						</a>
+						<div>{$project.fu_title}</div>
+					</div>
+					<div class="pro_ico">
+						<span>{$project.name}</span>
+						<span>
+							<img src="__IMAGE__/index/ico_3.png" alt="收藏">
+							{$project.name}
+						</span>
+					</div>
+				</li>
+				<!-- {/foreach} -->
+			</ul>
+			<div class="c"></div>
+			<div class="paging">
+				<a class="next" href="/index/project/index.html?more=1">查看更多</a>
+			</div>
+		</div>
+		<!-- 内容部分 end-->
+	</div>
+</div>
+<!--center end-->
+
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

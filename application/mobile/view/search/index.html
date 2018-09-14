@@ -1,0 +1,65 @@
+{include file="common/top"}
+<!--业态-->
+<div class="index_pro ytss">
+	<div class="clear"></div>
+	<p class="proname">
+		<span>搜索结果</span>
+	</p>
+	<div class="clear"></div>
+	<div class="fenlei">
+		<a href="">业态分类：</a>
+		<!-- {foreach $f_cate as $f_cate} -->
+		<a href="{$f_cate.url}" {if $f_cate.selected}class="sel"{/if}>{$f_cate.name}</a>
+		<!-- {/foreach} -->
+	</div>
+	<div class="fenlei flz">
+		<a href="">子分类：</a>
+		<!-- {foreach $s_cate as $s_cate} -->
+		<a href="{$s_cate.url}" {if $s_cate.selected}class="sel"{/if}>{$s_cate.name}</a>
+		<!-- {/foreach} -->
+	</div>
+	<div class="pro_list">
+		<ul>
+			<!-- {foreach $plan as $plan} -->
+			<li>
+				<div class="pro_pic">
+					<a href="" title="">
+						<img src="__IMAGE__/{$plan.image}" alt="">
+					</a>
+				</div>
+				<div class="pro_c">
+					<a href="" title="">
+						<h2>{$plan.name}</h2>
+					</a>
+					<div>{$plan.content}</div>
+				</div>
+				<div class="pro_ico">
+					<span>
+						<img src="__IMAGE__/index/ico_1.png" alt="收藏">
+						收藏
+					</span>
+
+					<span>
+						<a href="/index/cart/add?plan_id={$plan.id}">
+							<img src="__IMAGE__/index/ico_2.png" alt="加入购物车">
+						</a>
+					</span>
+
+				</div>
+			</li>
+			<!-- {/foreach} -->
+		</ul>
+		<div class="c">
+			<br>
+			<br>
+			<br>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<!--业态end-->
+
+<!-- footer -->
+{include file="common/foot"}
+</body>
+</html>

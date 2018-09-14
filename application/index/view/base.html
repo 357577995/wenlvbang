@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{block name="title" }{/block}</title>
+  <link rel="stylesheet" href="__INDEX__/index.css">
+  <link rel="icon" href="" type="image/x-icon" />
+</head>
+<body class="bodys">
+  <div class="body">
+    
+   <div>
+		你好，{:session('user_username')}     
+		
+		<a href="/index/login/logout" >【退出登录】</a>
+		<a href="/index/login/index">【登录】</a>
+		<a href="/index/user/ident?type=1">【认证成为项目方】</a>
+		<a href="/index/user/ident?type=2">【认证成为服务商】</a>
+		<a href="/index/index/index">【回首页】</a>
+		<a href="/index/cart/index">【方案库】</a>
+	</div>
+ 
+{block name="body"}
+
+{/block}
+  
+   
+   
+  </div>
+</body>
+
+</html>
+
+
+

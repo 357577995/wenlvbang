@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link type="text/css" rel="stylesheet" href="__INDEX__/css/index.css">
+<link type="text/css" rel="stylesheet" href="__INDEX__/css/slide.css">
+<!--<script src="js/jquery.min.js"></script>-->
+<script src="js/TouchSlide.1.1.js"></script>
+<link type="text/css" rel="stylesheet" href="__INDEX__/css/yd.css">
+<script src="js/daohang.js" type="text/javascript"></script>
+<link rel="stylesheet" href="__INDEX__/css/daohang.css">
+<link rel="stylesheet" href="__INDEX__/css/style.css">
+<title>登录</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+</head>
+<body>
+<div class="top dl" id="#top">
+	<div class="Menu-icon"><a href="/mobile/index" class="a_fanhui"><img src="__IMAGE__/mobile/ico_l2.png"></a>
+	</div>
+	<div class="editor-icon"><a href="/mobile/register/index.html">注册</a></div>
+</div>
+<div class="top dl">
+	<div class="logo"> <img src="__IMAGE__/mobile/logo2.png"> </div>
+</div>
+<!--top end-->
+<!--center-->
+<div class="uc_form_reg">
+	<form action="/mobile/login/login" method="post">
+	<ul>
+		<li><input value="" placeholder="手机号/用户名/邮箱" name='username'></li>
+		<li><input value="" placeholder="密码" class="mima" id="mima" type="password" name='password'><img src="__IMAGE__/mobile/ico_c5.png" class="mimaimg"></li>
+		<li class="sub"><input type="submit" name="" value="登录"></li>
+		<li class="lk"><a href='/mobile/login/sms'>手机动态码登录</a><a>忘记密码</a></li>
+	</ul>
+	</form>
+</div>
+<script src='__INDEX__/js/zepto-1.1.6.min.js'></script> 
+<script type="text/javascript">
+$('.mimaimg').on('click',function() { 
+    if ($("#mima").hasClass('mima')) { 
+        $("#mima").removeClass('mima'); 
+        $("#mima").attr('type', 'password'); 
+    } else { 
+        $("#mima").addClass('mima'); 
+        $("#mima").attr('type', 'text'); 
+    } 
+});
+</script>
+<!--center end-->
+<!--contact us end-->
+{include file="common/foot"}
+

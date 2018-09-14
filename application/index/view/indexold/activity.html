@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" name="viewport" />
+	<meta content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" name="viewport">
+	
+	<title>{$activity.title}</title>
+	<!-- 生成二维码js -->
+	<script type="text/javascript" src="__INDEX__/activity/jquery.min.js"></script>
+	<script type="text/javascript" src="__INDEX__/activity/qrcode.min.js"></script>
+	<style type="text/css">
+		body {  
+	      margin: 0;  
+	      font-family: '微软雅黑';
+	    }  
+	    .login_content {  
+	      position: absolute;  
+	      text-align: center;  
+	      min-width: 100%;  
+	    }  
+	    .login_content div {  
+	      font-size: 28px;
+	     
+	      color:#000;
+	    }  
+	     
+	    
+	    .detail{
+	    	border-radius: 5px;
+	    	border:1px dashed #0070cb;
+	    	margin-left:5%;
+	    	margin-right: 5%;
+	    }
+	    .details{
+	    	margin-left:20px;
+	    	margin-right:20px;
+	    	line-height: 30px;
+	    	font-size:18px;
+	    	color:#3e3e3e;
+	    }
+	</style>
+</head>
+<body>
+	<div><img src="__IMAGE__{$activity.image}" alt="" width="100%"></div>
+	<div class="login_content" style="margin-top:10px;">
+		<div >{$activity.title}</div>
+	</div>
+	<br/><br/><br/>
+	<div class="detail" style="margin-top:20px;float:left;width:90%">
+		<div class="details">
+			{$activity.content}
+		</div>
+	</div>
+	<div style="float:right;margin-top:-200px;margin-right:0px;"><img src="__IMAGE__/index/detail1.png" alt="" width="60%" style="float:right;"></div>
+	<!-- 二维码 -->
+	<div class="detail" style="width:90%;margin-top:32px;margin-right:5%;margin-left:5%;float:left;">
+		<input id="text" type="hidden" value="http://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}" /><br/>
+		<div>
+			<div id="qrcode" style="width:30%; height:160px;float:left;margin-left:15px;margin-top:10%;"></div>
+			<div style="float:right;margin-right:3%;width:50%;line-height:30px;margin-top:13%">
+				<span style="font-size:17px;color:#3e3e3e;">扫一扫</span><br/>
+				<span style="font-size:15px;color:#3e3e3e;">长按识别二维码</span><br/>
+				<span style="font-size:15px;color:#3e3e3e;">分享活动了解更多精彩</span>
+			</div>
+		</div>
+	</div>
+	{if condition="$show eq 1"}
+	<div style="float:left;border-bottom:2px dashed #d4d4d4;width:100%;margin-top:32px;margin-bottom:32px;"></div>
+	{if condition="$Think.session.form_username neq '' "}
+		<div style="text-align:center;"><img src="__IMAGE__/index/img1.png" alt=""></div>
+		<div style="text-align:center;margin-top:30px;">
+			姓名：<span style="color:red;">{$Think.session.form_username}</span>
+			手机号：<span style="color:red;">{$Think.session.form_mobile}</span>
+		</div>
+	{/if}
+		<div style="text-align:center;font-size:28px;color:#000;margin-top:30px;">参与报名</div>
+		<form action="/index/index/activity_form" method="post">
+			<table style="width:100%;text-align:center;margin-top:20px;font-size:21px;">
+				<!-- 固定表单 -->
+				<tr style="line-height:70px;">
+					<td style="width:30%">手机号：</td>
+					<td style="width:70%;"><input type="text" name="mobile" id="mobile" placeholder="请输入手机号" style="width:80%;height:37px;float:left;"></td>
+				</tr>
+				<tr>
+					<td style="width:30%">姓名：</td>
+					<td style="width:70%"><input type="text" name="username" id="username" placeholder="请输入姓名" style="width:80%;height:37px;float:left;"></td>
+				</tr>
+				<!-- 报名表单 -->
+				{foreach $question as $k => $vo }
+				<tr style="line-height:70px;">
+					<td style="width:30%">{$vo.name}</td>
+					<td style="width:70%">
+					{if condition="$vo.type eq 0"}
+						{foreach $vo.option as $value}
+						<input id="radio_type" name="question[0][{$k}]" value="{$value.id}-*-{$value.name}" type="radio">{$value.name}
+						{/foreach}
+					{elseif condition="$vo.type eq 1" /}
+						{foreach $vo.option as $value}
+						<input id="checkbox_type" name="question[1][{$vo.id}][{$value.id}]" value="{$value.name}" type="checkbox">{$value.name}
+						{/foreach}
+					{elseif condition="$vo.type eq 2" /}
+						<textarea id="text_type" class="form-control" name="question[2][{$vo.id}]" rows="2" autocomplete="off"></textarea>
+					{/if}
+					</td>
+				</tr>
+				{/foreach}
+				<input type="hidden" name="dan" id="dan" value="{if isset($dan)}{if condition="$dan eq 'yes'"}yes{else/}no{/if}{/if}">
+				<input type="hidden" name="fu" id="fu" value="{if isset($fu)}{if condition="$fu eq 'yes'"}yes{else/}no{/if}{/if}">
+				<input type="hidden" name="wen" id="wen" value="{if isset($wen)}{if condition="$wen eq 'yes'"}yes{else/}no{/if}{/if}">
+				<tr>
+					<input type="hidden" name="activity_id" id="activity_id" value="{$activity.id}">
+					<td colspan="2"><input type="submit" value="提交" id="submit" style="border-radius: 8px;margin-top:30px;background-color:#0070cb; border: none;color:#fff;padding: 2% 25%;text-align:center;text-decoration:none;display: inline-block;font-size:18px;"></td>
+				</tr>
+			</table>
+		</form>
+	{/if}
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	
+</body>
+<script type="text/javascript" src="__INDEX__/activity/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	//提交验证
+	$('#submit').click(function(){
+		var username = $('#username').val();
+		var mobile = $('#mobile').val();
+		var activity_id = $('#activity_id').val();
+		if(username==''){
+			alert('姓名不能为空');
+			return false;
+		}
+		if(mobile==''){
+			alert('手机号不能为空');
+			return false;
+		}
+		if(mobile.match(/^1(3|4|5|7|8)\d{9}$/)==null){
+			alert('手机号格式不正确');
+			return false;
+		}
+		var dan = $('#dan').val();
+		var fu = $('#fu').val();
+		var wen = $('#wen').val();
+
+		if( dan == 'yes' ){
+			var radio_type = $('input[id="radio_type"]:checked').val();
+			if( typeof(radio_type)=='undefined'){
+				alert('您还有选项没有完成');
+				return false;
+			}
+		}
+		if( fu == 'yes' ){
+			var checkbox_type = $('input[id="checkbox_type"]:checked').val();
+			if( typeof(checkbox_type)=='undefined'){
+				alert('您还有选项没有完成');
+				return false;
+			}
+		}
+		if( wen == 'yes' ){
+			var text_type = $('#text_type').val();
+			if(text_type==''){
+				alert('您还有信息没填');
+				return false;
+			}
+		}
+	});
+	
+	// 二维码js
+	var qrcode = new QRCode(document.getElementById("qrcode"), {
+		width : 100,
+		height : 100
+	});
+	function makeCode () {		
+		var elText = document.getElementById("text");
+		
+		if (!elText.value) {
+			alert("Input a text");
+			elText.focus();
+			return;
+		}
+		qrcode.makeCode(elText.value);
+	}
+	makeCode();
+	$("#text").
+		on("blur", function () {
+			makeCode();
+		}).
+		on("keydown", function (e) {
+			if (e.keyCode == 13) {
+				makeCode();
+			}
+		});
+	</script>
+</html>

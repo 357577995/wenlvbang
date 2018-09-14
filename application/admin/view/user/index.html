@@ -1,0 +1,54 @@
+﻿{extend name="base" /}
+{block name="title"}管理员列表{/block}
+{block name="body"}
+<link rel="stylesheet" href="__ADMIN__/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<div>
+			<div class="pd-20">
+				
+				<div class="mt-20">
+					<form action="/admin/user/index" method="get" accept-charset="utf-8">
+						<div class="text-c"> 
+							<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="username" name="username" value="{if isset($_GET['username'])}{$_GET['username']}{/if}">
+							<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+						</div>
+					</form>
+					<div class="cl pd-5 bg-1 bk-gray mt-20">
+						<a href="/admin/user/add"  class="btn btn-danger radius">添加管理员</a>
+						<span class="r">共有数据：<strong>{$total}</strong> 条</span>
+					</div><br/>
+					<table class="table table-border table-bordered table-bg table-hover table-sort">
+						<thead>
+							<tr class="text-c">
+								<th width="40">ID</th>
+								<th width="120">用户名</th>
+								<th width="120">邮箱</th>
+								<th width="120">角色</th>
+								<th width="230">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						{foreach $list as $vo}
+							<tr class="text-c va-m">
+								<td>{$vo.admin_id}</td>
+								<td>{$vo.username}</td>
+								<td>{$vo.email}</td>
+								<td>{$vo.role}</td>
+								<td class="td-manage">
+									<a style="text-decoration:none"  class="btn btn-success radius" href="/admin/user/edit?id={$vo.admin_id}" >编辑</a>
+									<a style="text-decoration:none" class="btn btn-primary radius" href="/admin/user/del?id={$vo.admin_id}" onclick="javascript:return confirm('确认删除吗？')" >删除</a>
+								</td>
+							</tr>
+						{/foreach}
+						</tbody>
+					</table>
+				</div>
+				<div class="fenye">{$page}</div>
+			</div>
+		</div>
+	</div>
+</section>
+{/block}
