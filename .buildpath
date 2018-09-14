@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry excluding="public/admin/static/datetimepicker/" kind="src" path=""/>
+	<buildpathentry kind="src" path="public/admin/static/datetimepicker"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>
