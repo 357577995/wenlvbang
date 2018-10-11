@@ -24,7 +24,7 @@ class Activity extends Controller
 		$where = empty($cate_id) ? [] : [
 			'cate_id' => $cate_id
 		];
-		$activity = Db::table('activity')->where($where)->limit(0, 5)->select();
+		$activity = Db::table('activity')->where($where)->order('time desc')->limit(0, 5)->select();
 		
 		foreach($activity as &$item)
 		{
@@ -58,6 +58,10 @@ class Activity extends Controller
 		$this->assign('title', $title);
 		$this->assign('keywords', $keywords);
 		$this->assign('description', $description);
+		
+		$image = $activity[0]['image'];
+		$imgUrl = 'http://' . $_SERVER['HTTP_HOST'] . $image;
+		$this->assign('imgUrl', $imgUrl);
 		return $this->fetch('activity/list');
 	}
 
@@ -84,7 +88,7 @@ class Activity extends Controller
 		$last = Db::table('activity')->where('id', '<', $id)->order('id desc')->find();
 		if($tab_ids)
 		{
-			$recomme_ids = Db::table('tab_map')->where('activity_id', 'neq', $id)->where('tab_id','in', $tab_ids)->limit(3)->column('activity_id');
+			$recomme_ids = Db::table('tab_map')->where('activity_id', 'neq', $id)->where('tab_id', 'in', $tab_ids)->limit(3)->column('activity_id');
 			$recomme = Db::table('activity')->where('id', 'in', $recomme_ids)->select();
 		}
 		else
@@ -111,6 +115,9 @@ class Activity extends Controller
 		$this->assign('title', $project['seo_title']);
 		$this->assign('keywords', $project['seo_keywords']);
 		$this->assign('description', $project['seo_description']);
+		$image = self::cut('src="', '" title', $project['content']);
+		$imgUrl = 'http://' . $_SERVER['HTTP_HOST'] . $image;
+		$this->assign('imgUrl', $imgUrl);
 		return $this->fetch('activity/info');
 	}
 
@@ -190,5 +197,12 @@ class Activity extends Controller
 		{
 			$this->error('添加失败', '/mobile/activity/index');
 		}
+	}
+
+	function cut ($begin, $end, $str)
+	{
+		$b = mb_strpos($str, $begin) + mb_strlen($begin);
+		$e = mb_strpos($str, $end) - $b;
+		return mb_substr($str, $b, $e);
 	}
 }

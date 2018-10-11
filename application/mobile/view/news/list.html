@@ -16,22 +16,19 @@
 		<div class="bd">
 			<div class="tempWrap" style="overflow: hidden; position: relative;">
 				<ul style="">
+					<!-- {foreach $recommend as $vo} -->
 					<li style="display: table-cell; vertical-align: top; width: 707px;">
-						<a class="pic" href="/mobile/news/info.html?id={$recommend1.id}">
-							<img src="__IMAGE__/{$recommend1.image}" width="100%">
+						<a class="pic" href="/index/news/info.html?id={$vo.id}">
+							<img  src="__IMAGE__/{$vo.image}" width="100%">
 							<div class="b"></div>
-							<div class="t">{$recommend1.title}</div>
+							<div class="t">{$vo.title}</div>
 						</a>
 						</a>
 					</li>
-					<li style="display: table-cell; vertical-align: top; width: 707px;">
-						<a class="pic" href="/mobile/news/info.html?id={$recommend2.id}">
-							<img src="__IMAGE__/{$recommend2.image}" width="100%">
-							<div class="b"></div>
-							<div class="t">{$recommend2.title}</div>
-						</a>
-						</a>
-					</li>
+					<!-- {/foreach} -->
+					 
+						
+					 
 				</ul>
 			</div>
 		</div>
@@ -110,5 +107,6 @@
 	});
 </script>
 <!--内容区域 end-->
+{include file="common/share"}
 <!--contact us end-->
 {include file="common/foot"}

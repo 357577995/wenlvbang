@@ -1,0 +1,58 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+		share();
+	});
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+<script>
+	function share() {
+		var imgUrl = "{$imgUrl}";
+		//var imgUrl = "http://www.wenlvbang.com/ueditor/php/upload/image/20181010/1539140545233232.jpg";
+		var url = location.href.split('#')[0];
+		var title = "{if isset($title)}{$title}{/if}";
+		var descContent = "{if isset($description)}{$description}{/if}";
+		var shareTitle = "{if isset($title)}{$title}{/if}";
+		$.ajax({
+			url: "/mobile/news/getweixin.html",
+			data: {
+				url: url
+			},
+			dataType: 'json',
+			success: function(result) {
+				if (result.code == 0) {
+
+					wx.config({
+						debug: false,
+						appId: result.data.appId,
+						timestamp: result.data.timestamp,
+						nonceStr: result.data.nonceStr,
+						signature: result.data.signature,
+						jsApiList: [
+						// 所有要调用的 API 都要加到这个列表中
+						'onMenuShareAppMessage', 'onMenuShareTimeline']
+					});
+					wx.ready(function() { //需在用户可能点击分享按钮前就先调用
+						wx.onMenuShareAppMessage({
+							title: title, // 分享标题
+							desc: descContent, // 分享描述
+							link: url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+							imgUrl: imgUrl, // 分享图标
+						}, function(res) {
+							alert(JSON.stringify(res));
+						});
+
+						// 分享到朋友圈
+						wx.onMenuShareTimeline({
+							title: title, // 分享标题
+							desc: descContent, // 分享描述
+							link: url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+							imgUrl: imgUrl, // 分享图标
+						}, function(res) {
+							alert(JSON.stringify(res));
+						});
+					});
+				}
+			}
+		});
+	}
+</script>

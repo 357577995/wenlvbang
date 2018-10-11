@@ -26,6 +26,9 @@ class Expert extends Controller
 		}
 		$this->assign('expert', $expert);
 		$this->assign('limit', 1);
+		$image = $expert[0]['image'];
+		$imgUrl = 'http://' . $_SERVER['HTTP_HOST'] . $image;
+		$this->assign('imgUrl', $imgUrl);
 		return $this->fetch('expert/list');
 	}
 
@@ -80,6 +83,9 @@ class Expert extends Controller
 		}
 		$expert = Db::table('expert')->where('id', $id)->find();
 		$this->assign('expert', $expert);
+		$image = self::cut('src="', '" title', $expert['content']);
+		$imgUrl = 'http://' . $_SERVER['HTTP_HOST'] . $image;
+		$this->assign('imgUrl', $imgUrl);
 		return $this->fetch('expert/info');
 	}
 
@@ -137,5 +143,11 @@ class Expert extends Controller
 		// $this->error('文件上传失败', '/index/expert/add');
 		// }
 		// }
+	}
+	function cut ($begin, $end, $str)
+	{
+		$b = mb_strpos($str, $begin) + mb_strlen($begin);
+		$e = mb_strpos($str, $end) - $b;
+		return mb_substr($str, $b, $e);
 	}
 }

@@ -41,6 +41,11 @@ class Dakashuo extends Controller
 		$this->assign('title', $title);
 		$this->assign('keywords', $keywords);
 		$this->assign('description', $description);
+		
+		$image = $dakashuo[0]['image'];
+		$imgUrl = 'http://' . $_SERVER['HTTP_HOST'] . $image;
+		$this->assign('imgUrl', $imgUrl);
+		
 		return $this->fetch('dakashuo/list');
 	}
 
@@ -131,6 +136,16 @@ class Dakashuo extends Controller
 		$this->assign('title', $dakashuo['seo_title']);
 		$this->assign('keywords', $dakashuo['seo_keywords']);
 		$this->assign('description', $dakashuo['seo_description']);
+		$image = self::cut('src="', '" title', $dakashuo['content']);
+		$imgUrl = 'http://' . $_SERVER['HTTP_HOST'] . $image;
+		$this->assign('imgUrl', $imgUrl);
 		return $this->fetch('dakashuo/info');
+	}
+
+	function cut ($begin, $end, $str)
+	{
+		$b = mb_strpos($str, $begin) + mb_strlen($begin);
+		$e = mb_strpos($str, $end) - $b;
+		return mb_substr($str, $b, $e);
 	}
 }

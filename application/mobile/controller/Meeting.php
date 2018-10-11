@@ -60,6 +60,9 @@ class Meeting extends Controller
 		$this->assign('keywords', $keywords);
 		$this->assign('description', $description);
 		
+		$image = $message[0]['image'];
+		$imgUrl = 'http://' . $_SERVER['HTTP_HOST'] . $image;
+		$this->assign('imgUrl', $imgUrl);
 		return $this->fetch('meeting/meeting_list');
 	}
 
@@ -111,6 +114,9 @@ class Meeting extends Controller
 		$this->assign('keywords', $project['seo_keywords']);
 		$this->assign('description', $project['seo_description']);
 		
+		$image = self::cut('src="', '" title', $project['content']);
+		$imgUrl = 'http://' . $_SERVER['HTTP_HOST'] . $image;
+		$this->assign('imgUrl', $imgUrl);
 		return $this->fetch('meeting/info');
 	}
 
@@ -191,4 +197,11 @@ class Meeting extends Controller
 		
 		return $res;
 	}
+	function cut ($begin, $end, $str)
+	{
+		$b = mb_strpos($str, $begin) + mb_strlen($begin);
+		$e = mb_strpos($str, $end) - $b;
+		return mb_substr($str, $b, $e);
+	}
+	
 }

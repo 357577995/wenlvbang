@@ -32,6 +32,11 @@ class Project extends Controller
 		$this->assign('project', $project);
 		$this->assign('cate_id', $cate_id);
 		$this->assign('limit', 1);
+		
+		$image = $project[0]['image'];
+		$imgUrl = 'http://' . $_SERVER['HTTP_HOST'] . $image;
+		$this->assign('imgUrl', $imgUrl);
+		
 		return $this->fetch('project/list');
 	}
 
@@ -103,6 +108,16 @@ class Project extends Controller
 		$cate_info = DB::table('project_cate')->where('id', $project['cate_id'])->find();
 		$this->assign('cate_info', $cate_info);
 		$this->assign('project', $project);
+		$image = self::cut('src="', '" title', $project['content']);
+		$imgUrl = 'http://' . $_SERVER['HTTP_HOST'] . $image;
+		$this->assign('imgUrl', $imgUrl);
 		return $this->fetch('project/info');
+	}
+
+	function cut ($begin, $end, $str)
+	{
+		$b = mb_strpos($str, $begin) + mb_strlen($begin);
+		$e = mb_strpos($str, $end) - $b;
+		return mb_substr($str, $b, $e);
 	}
 }

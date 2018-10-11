@@ -5,6 +5,8 @@ use think\Controller;
 use think\Db;
 use think\Request;
 use think\Session;
+use org\wechat\JSSDK;
+use think\Config;
 
 class News extends Controller
 {
@@ -48,12 +50,15 @@ class News extends Controller
 		$new_cate = Db::table('new_cate')->select();
 		$this->assign('m_new_cate', $new_cate);
 		$seo = Db::table('seo')->where('type = 0 and is_list=1')->find();
-		$title = empty($seo['title'])?'资讯':$seo['title'];
-		$keywords = empty($seo['keywords'])?'资讯':$seo['keywords'];
-		$description = empty($seo['description'])?'资讯':$seo['description'];
+		$title = empty($seo['title']) ? '资讯' : $seo['title'];
+		$keywords = empty($seo['keywords']) ? '资讯' : $seo['keywords'];
+		$description = empty($seo['description']) ? '资讯' : $seo['description'];
 		$this->assign('title', $title);
 		$this->assign('keywords', $keywords);
 		$this->assign('description', $description);
+		$image = $news[0]['image'];
+		$imgUrl = 'http://' . $_SERVER['HTTP_HOST'] . $image;
+		$this->assign('imgUrl', $imgUrl);
 		return $this->fetch('news/list');
 	}
 
@@ -126,33 +131,59 @@ class News extends Controller
 		$last = Db::table('news')->where('id', '<', $id)->order('id desc')->find();
 		if($tab_ids)
 		{
-			$recomme_ids = Db::table('tab_map')->where('activity_id', 'neq', $id)->where('tab_id','in', $tab_ids)->limit(3)->column('activity_id');
+			$recomme_ids = Db::table('tab_map')->where('activity_id', 'neq', $id)->where('tab_id', 'in', $tab_ids)->limit(3)->column('activity_id');
 			$recomme = Db::table('news')->where('id', 'in', $recomme_ids)->select();
 		}
 		else
 		{
 			$recomme = [];
 		}
-		if(empty($next)){
-			$next['id']=$id;
-			$next['title']='没有了';
+		if(empty($next))
+		{
+			$next['id'] = $id;
+			$next['title'] = '没有了';
 		}
-		if(empty($last)){
-			$last['id']=$id;
-			$last['title']='没有了';
+		if(empty($last))
+		{
+			$last['id'] = $id;
+			$last['title'] = '没有了';
 		}
+		
+		$image = self::cut('src="', '" title', $news['content']);
+		$imgUrl = 'http://' . $_SERVER['HTTP_HOST'] . $image;
+		$this->assign('imgUrl', $imgUrl);
 		$this->assign('news', $news);
 		$this->assign('tab', $tab);
 		$this->assign('cate_info', $cate_info);
 		$this->assign('next', $next);
 		$this->assign('last', $last);
 		$this->assign('recomme', $recomme);
-		$this->assign('user_id', $cate_info['id']==1?Session::get('user_id'):1);
+		$this->assign('user_id', $cate_info['id'] == 1 ? Session::get('user_id') : 1);
 		$new_cate = Db::table('new_cate')->select();
 		$this->assign('m_new_cate', $new_cate);
 		$this->assign('title', $news['seo_title']);
 		$this->assign('keywords', $news['seo_keywords']);
 		$this->assign('description', $news['seo_description']);
+		
 		return $this->fetch('news/info');
+	}
+
+	public function getweixin (Request $request)
+	{
+		$url = $request->get('url');
+		$jssdkObj = new \org\wechat\Jssdk("wxfeeee548bd3b12f9", "69f286e1b26561970a21e6d8f5836ff2", $url);
+		$data = $jssdkObj->getSignPackage();
+		
+		return [
+			'code' => 0, 
+			'data' => $data
+		];
+	}
+
+	function cut ($begin, $end, $str)
+	{
+		$b = mb_strpos($str, $begin) + mb_strlen($begin);
+		$e = mb_strpos($str, $end) - $b;
+		return mb_substr($str, $b, $e);
 	}
 }

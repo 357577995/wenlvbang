@@ -42,10 +42,34 @@
 	{/foreach}
 </div>
 {/if}
-<div class="detail_baoming">
+
+<!-- 手机报名按钮样式 -->
+                    
+                        <div class="enter-submit-mobile" style="position: fixed;
+    bottom: 5rem;
+    right: 1rem;
+    display: block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;">
+                            <a href=" " class="cd-popup-trigger" style="background: #f7921e;
+    color: #fff;
+    height: 5rem;
+    width: 5rem;
+    display: block;
+    text-align: center;
+    line-height: 5rem;
+    font-size: 1rem;
+    border-radius: 2.5rem;
+    text-decoration: none;">立即报名</a>
+                        </div>
+                    
+                    <!-- end -->
+<!--<div class="detail_baoming">
 	<div class="cd-popup-trigger"><img src="__IMAGE__/mobile//baoming.png"></div>
 </div>
-
+-->
 <link rel="stylesheet" href="__INDEX__/css/tanchuceng.css"> <!-- Resource style -->
 <div class="cd-popup" role="alert">
 	<div class="cd-popup-container">
@@ -55,10 +79,10 @@
 	<div class="uc_form">
 		<form action="/mobile/activity/sub" method="POST" onsubmit='return validate(this)'>
 		<ul>
-			<li><span>姓名：</span><input value="" name='user_name'></li>
-			<li><span>电话：</span><input value="" name='mobile'></li>
+			<li><span>姓名：</span><input value="" name='user_name' style=" border:1px #999999 solid;"></li>
+			<li><span>电话：</span><input value="" name='mobile' style=" border:1px #999999 solid;"></li>
 			<input type='hidden' name='activity_id' value={$project.id}>
-			<li class="sub"><input type="submit" name="" value="提交"></li>
+			<li class="sub" ><input type="submit" name="" value="立即报名" style="width: 80px; height: 28px; background-color: #f7921e; color: #FFFFFF;"></li>
 		</ul>
 		</form>
 	</div>
@@ -82,5 +106,6 @@
 			return true;
 		}
 	</script>
-<script src="__INDEX__/js/tanchuceng.js"></script> 
+<script src="__INDEX__/js/tanchuceng.js"></script>
+{include file="common/share"} 
 {include file="common/foot"}
