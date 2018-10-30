@@ -16,46 +16,50 @@ class Index extends Controller
 		$cate2 = Db::table('cate')->where('parent_id', '>', 0)->limit(2, 2)->select();
 		$cate3 = Db::table('cate')->where('parent_id', '>', 0)->limit(4, 2)->select();
 		
-		foreach($cate1 as &$item)
-		{
-			
-			$item['plan'] = Db::table('plan')->where('cate_id', $item['id'])->limit(8)->select();
-		}
-		foreach($cate2 as &$item)
-		{
-			
-			$item['plan'] = Db::table('plan')->where('cate_id', $item['id'])->limit(8)->select();
-		}
-		foreach($cate3 as &$item)
-		{
-			
-			$item['plan'] = Db::table('plan')->where('cate_id', $item['id'])->limit(8)->select();
-		}
+// 		$where['recommend'] = 1;
+// 		foreach($cate1 as &$item)
+// 		{
+// 			$where['cate_id'] = $item['id'];
+// 			$item['plan'] = Db::table('plan')->where($where)->limit(8)->select();
+// 			unset($item);
+// 		}
+// 		foreach($cate2 as &$item)
+// 		{
+// 			$where['cate_id'] = $item['id'];
+// 			$item['plan'] = Db::table('plan')->where($where)->limit(8)->select();
+// 			unset($item);
+// 		}
+// 		foreach($cate3 as &$item)
+// 		{
+// 			$where['cate_id'] = $item['id'];
+// 			$item['plan'] = Db::table('plan')->where($where)->limit(8)->select();
+// 			unset($item);
+// 		}
 		foreach($cate as &$item)
 		{
-			
 			$item['next_cate'] = Db::table('cate')->where('parent_id', $item['id'])->select();
+			unset($item);
 		}
+		
 		// 投融信息
-		$investment = Db::table('investment')->limit(2)->select();
-		//大咖
+		$investment = Db::table('investment')->limit(2)->order('time', 'desc')->select();
+		// 大咖
 		
 		$daka = Db::table('dakashuo')->alias('n')
-		->join('dakashuo_cate c', 'c.id = n.cate_id')
-		->field('n.*,c.name')
-		->limit(0, 3)
-		->select();
-		
-		
+			->join('dakashuo_cate c', 'c.id = n.cate_id')
+			->where('recommend', 1)
+			->field('n.*,c.name')
+			->limit(0, 3)
+			->select();
 		
 		$this->assign('daka', $daka);
 		
-		$plan1 =  Db::table('plan')->limit(0,8)->select();
-		$plan2 =  Db::table('plan')->limit(8,8)->select();
-		$plan3 =  Db::table('plan')->limit(16,8)->select();
-		$plan4 =  Db::table('plan')->limit(24,8)->select();
-		$plan5 =  Db::table('plan')->limit(32,8)->select();
-		$plan6 =  Db::table('plan')->limit(48,8)->select();
+		$plan1 =  Db::table('plan')->where('is_wonderful=1')->order('id desc')->limit(0,8)->select();
+		$plan2 =  Db::table('plan')->where('is_tide=1')->order('id desc')->limit(0,8)->select();
+		$plan3 =  Db::table('plan')->where('parent_cate_id=1 and recommend=1')->order('id desc')->limit(0,8)->select();//亲子 id=1
+		$plan4 =  Db::table('plan')->where('parent_cate_id=31 and recommend=1')->order('id desc')->limit(0,8)->select();//创意建筑 id=31
+		$plan5 =  Db::table('plan')->where('parent_cate_id=51 and recommend=1')->order('id desc')->limit(0,8)->select();//低空飞行 id=57
+		$plan6 =  Db::table('plan')->where('parent_cate_id=11 and recommend=1')->order('id desc')->limit(0,8)->select();//演艺剧目 id=11
 		$this->assign('plan1', $plan1);
 		$this->assign('plan2', $plan2);
 		$this->assign('plan3', $plan3);
@@ -67,7 +71,7 @@ class Index extends Controller
 		$this->assign('cate2', $cate2);
 		$this->assign('cate3', $cate3);
 		$this->assign('investment', $investment);
-		//$recommend = Db::table('recommend')->limit(0,2)->select();
+		// $recommend = Db::table('recommend')->limit(0,2)->select();
 		$recommend = Db::table('recommend')->select();
 		$this->assign('recommend', $recommend);
 		return $this->fetch('index/index');

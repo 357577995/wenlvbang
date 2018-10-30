@@ -62,6 +62,52 @@
 							<script id="editor" name="content" type="text/plain" style="width: 1000px; height: 500px;">{$new.content}</script>
 						</div>
 					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">
+							<span class="c-red">*</span>
+							是否推荐：
+						</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="radio" name="recommend" value="0" {if $new.recommend==0}checked{/if}>
+							不推荐
+							<input type="radio" name="recommend" value="1" {if $new.recommend==1}checked{/if}>
+							推荐
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">
+							<span class="c-red">*</span>
+							是否精彩推荐：
+						</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="radio" name="is_wonderful" value="0" {if $new.is_wonderful==0}checked{/if}>
+							不推荐
+							<input type="radio" name="is_wonderful" value="1" {if $new.is_wonderful==0}checked{/if}>
+							推荐
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">
+							<span class="c-red">*</span>
+							是否潮流推荐：
+						</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="radio" name="is_tide" value="0" {if $new.is_tide==0}checked{/if}>
+							不推荐
+							<input type="radio" name="is_tide" value="1" {if $new.is_tide==0}checked{/if}>
+							推荐
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">
+							<span class="c-red">*</span>
+							排序：
+						</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" name="sort" value="{$new.sort}" id='sort'>
+
+						</div>
+					</div>
 					<input type="hidden" name="id" id="id" value="{$new.id}">
 					<div class="row cl">
 						<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">

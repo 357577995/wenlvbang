@@ -200,6 +200,7 @@ class dakashuo extends Base
 		$data['title'] = $_POST['title'];
 		$data['cate_id'] = $_POST['cate_id'];
 		$data['content'] = $_POST['content'];
+		$data['recommend'] = $_POST['recommend'];
 		$data['offline_content'] = $_POST['offline_content'];
 		$data['time'] = ! empty($_POST['time']) ? strtotime($_POST['time']) : time();
 		// 判断是否有新图片上传
@@ -314,6 +315,7 @@ class dakashuo extends Base
 		$data['title'] = $_POST['title'];
 		$data['cate_id'] = $_POST['cate_id'];
 		$data['content'] = $_POST['content'];
+		$data['recommend'] = $_POST['recommend'];
 		$data['offline_content'] = $_POST['offline_content'];
 		$data['time'] = ! empty($_POST['time']) ? strtotime($_POST['time']) : time();
 		$oldimg = Db::table('dakashuo')->field('image')->where('id', $_POST['id'])->find();

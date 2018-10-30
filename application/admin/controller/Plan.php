@@ -300,6 +300,10 @@ class Plan extends Base
 		$data['name'] = $_POST['name'];
 		$data['cate_id'] = $_POST['cate_id'];
 		$data['content'] = $_POST['content'];
+		$data['recommend'] = $_POST['recommend'];
+		$data['is_wonderful'] = $_POST['is_wonderful'];
+		$data['is_tide'] = $_POST['is_tide'];
+		$data['sort'] = ! empty($_POST['sort']) ? $_POST['sort'] : 255;
 		$parent_cate_id = Db::name('cate')->field('parent_id')->where('id', $data['cate_id'])->find();
 		$data['parent_cate_id'] = $parent_cate_id['parent_id'];
 		// 判断是否有新图片上传
@@ -381,6 +385,10 @@ class Plan extends Base
 		$data['name'] = $_POST['name'];
 		$data['cate_id'] = $_POST['cate_id'];
 		$data['content'] = $_POST['content'];
+		$data['recommend'] = $_POST['recommend'];
+		$data['is_wonderful'] = $_POST['is_wonderful'];
+		$data['is_tide'] = $_POST['is_tide'];
+		$data['sort'] = ! empty($_POST['sort']) ? $_POST['sort'] : 255;
 		$parent_cate_id = Db::name('cate')->field('parent_id')->where('id', $data['cate_id'])->find();
 		$data['parent_cate_id'] = $parent_cate_id['parent_id'];
 		// 判断是否有新图片上传

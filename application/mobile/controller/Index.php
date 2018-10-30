@@ -42,12 +42,12 @@ class Index extends Controller
 		$daka =DB::table('dakashuo')->order('time desc')->limit(0,3)->select();
 		$this->assign('daka', $daka);
 		
-		$plan1 =  Db::table('plan')->limit(0,8)->select();
-		$plan2 =  Db::table('plan')->limit(8,8)->select();
-		$plan3 =  Db::table('plan')->limit(16,8)->select();
-		$plan4 =  Db::table('plan')->limit(24,8)->select();
-		$plan5 =  Db::table('plan')->limit(32,8)->select();
-		$plan6 =  Db::table('plan')->limit(48,8)->select();
+		$plan1 = Db::table('plan')->where('recommend', 1)->limit(0, 8)->order('sort', 'asc')->select();
+		$plan2 = Db::table('plan')->where('recommend', 1)->limit(8, 8)->order('sort', 'asc')->select();
+		$plan3 = Db::table('plan')->where('recommend', 1)->limit(16, 8)->order('sort', 'asc')->select();
+		$plan4 = Db::table('plan')->where('recommend', 1)->limit(24, 8)->order('sort', 'asc')->select();
+		$plan5 = Db::table('plan')->where('recommend', 1)->limit(32, 8)->order('sort', 'asc')->select();
+		$plan6 = Db::table('plan')->where('recommend', 1)->limit(48, 8)->order('sort', 'asc')->select();
 		$this->assign('plan1', $plan1);
 		$this->assign('plan2', $plan2);
 		$this->assign('plan3', $plan3);

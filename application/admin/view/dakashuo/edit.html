@@ -99,6 +99,18 @@
 							<input type="text" class="input-text" value="{$dakashuo.seo_description}" name="seo_description">
 						</div>
 					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">
+							<span class="c-red">*</span>
+							是否推荐：
+						</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="radio" name="recommend" value="0" {if $dakashuo.recommend==0}checked{/if}>
+							不推荐
+							<input type="radio" name="recommend" value="1" {if $dakashuo.recommend==1}checked{/if}>
+							推荐
+						</div>
+					</div>
 					<input type="hidden" name="id" id="id" value="{$dakashuo.id}">
 					<div class="row cl">
 						<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
